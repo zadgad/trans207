@@ -57,6 +57,70 @@
                                 </li>
                             </ul>
                         </li>
+                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo cliente</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de cliente</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-user fa-fw"></i> &nbsp; Choferes <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>chofer-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo chofer</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>chofer-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de chofer</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>chofer-search/"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar chofer</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-bus fa-fw"></i> &nbsp; Vehiculos <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>auto-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo vehiculo</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>auto-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de vehiculo</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>auto-search/"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar vehiculo</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-shopping-cart fa-fw"></i> &nbsp; Ventas <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>venta-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo venta</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>venta-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de venta</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>venta-search/"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar venta</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Reportes <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="<?php echo SERVERURL; ?>reporte-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Reportes</a>
+                                </li>
+                            </ul>
+                        </li>
                         <?php 
                          } 
                          if ($_SESSION['privilegio_spm']==1 || $_SESSION['privilegio_spm']==2)
