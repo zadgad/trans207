@@ -2,7 +2,7 @@
     $peticionAjax=true;
     require_once "../config/APP.php";
 
-    if(isset($_POST['auto_dni_reg']) || isset($_POST['auto_id_del']) || isset($_POST['auto_id_up'])){
+    if(isset($_POST['auto_placa_reg']) || isset($_POST['auto_id_del']) || isset($_POST['auto_id_up'])){
 
         /*--------- Instancia al controlador ---------*/
         require_once "../controladores/autoControlador.php";
@@ -10,7 +10,7 @@
 
 
         /*--------- Agregar un auto ---------*/
-        if(isset($_POST['auto_dni_reg']) && isset($_POST['auto_nombre_reg'])){
+        if(isset($_POST['auto_placa_reg']) && isset($_POST['auto_chasis_reg'])){
             echo $ins_auto->agregar_auto_controlador();
         }
     

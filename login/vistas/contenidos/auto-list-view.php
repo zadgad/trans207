@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS
+		<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE autoS
 	</h3>
 	<p class="text-justify">
 		
@@ -16,21 +16,21 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO</a>
+			<a href="<?php echo SERVERURL; ?>auto-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO auto</a>
 		</li>
 		<li>
-			<a class="active" href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
+			<a class="active" href="<?php echo SERVERURL; ?>auto-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE autoS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
+			<a href="<?php echo SERVERURL; ?>auto-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR auto</a>
 		</li>
 	</ul>	
 </div>
 
 <div class="container-fluid">
 <?php 
-require_once "./controladores/usuarioControlador.php";
-$ins_usuario=new usuarioControlador();
-echo $ins_usuario->paginador_usuario_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],"");
+require_once "./controladores/autoControlador.php";
+$ins_auto=new autoControlador();
+echo $ins_auto->paginador_auto_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],"");
  ?>
 </div>

@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO
+		<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR auto
 	</h3>
 	<p class="text-justify">
 		
@@ -16,30 +16,30 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO</a>
+			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO auto</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
+			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE autoS</a>
 		</li>
 		<li>
-			<a  href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
+			<a  href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR auto</a>
 		</li>
 	</ul>	
 </div>
 <?php 
-if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario']))
+if(!isset($_SESSION['busqueda_auto']) && empty($_SESSION['busqueda_auto']))
 {
 
  ?>
 
 <div class="container-fluid">
 	<form class="form-neon FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="default" autocomplete="off">
-		<input type="hidden" name="modulo" value="usuario">
+		<input type="hidden" name="modulo" value="auto">
 		<div class="container-fluid">
 			<div class="row justify-content-md-center">
 				<div class="col-12 col-md-6">
 					<div class="form-group">
-						<label for="inputSearch" class="bmd-label-floating">¿Qué usuario estas buscando?</label>
+						<label for="inputSearch" class="bmd-label-floating">¿Qué auto estas buscando?</label>
 						<input type="text" class="form-control" name="busqueda_inicial" id="inputSearch" maxlength="30">
 					</div>
 				</div>
@@ -60,13 +60,13 @@ else
 
 <div class="container-fluid">
 	<form class=" FormularioAjax" action="<?php echo SERVERURL; ?>ajax/buscadorAjax.php" method="POST" data-form="search" autocomplete="off">
-		<input type="hidden" name="modulo" value="usuario">
+		<input type="hidden" name="modulo" value="auto">
 		<input type="hidden" name="eliminar_busqueda" value="eliminar">
 		<div class="container-fluid">
 			<div class="row justify-content-md-center">
 				<div class="col-12 col-md-6">
 					<p class="text-center" style="font-size: 20px;">
-						Resultados de la busqueda <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”</strong>
+						Resultados de la busqueda <strong>“<?php echo $_SESSION['busqueda_auto']; ?>”</strong>
 					</p>
 				</div>
 				<div class="col-12">
@@ -82,9 +82,9 @@ else
 
 <div class="container-fluid">
 	<?php 
-require_once "./controladores/usuarioControlador.php";
-$ins_usuario=new usuarioControlador();
-echo $ins_usuario->paginador_usuario_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION['busqueda_usuario']);
+require_once "./controladores/autoControlador.php";
+$ins_auto=new autoControlador();
+echo $ins_auto->paginador_auto_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION['busqueda_auto']);
  ?>
 </div>
 <?php } ?>
