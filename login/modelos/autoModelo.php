@@ -6,8 +6,8 @@
 
             /*--------- Modelo agregar auto ---------*/
             protected static function agregar_auto_modelo($datos){
-                  $sql=mainModel::conectar()->prepare("INSERT INTO vehiculo(auto_id,auto_placa,auto_chasis,auto_color,auto_modelo,auto_marca) VALUES(:auto_id,:auto_placa,:auto_chasis,:auto_color,:auto_modelo,:auto_marca)");
-                  $sql->bindParam(":auto_id",null);
+                  $sql=mainModel::conectar()->prepare("INSERT INTO vehiculo(auto_placa,auto_chasis,auto_color,auto_modelo,auto_marca) VALUES(:auto_placa,:auto_chasis,:auto_color,:auto_modelo,:auto_marca)");
+             
                   $sql->bindParam(":auto_placa",$datos['auto_placa']);
                   $sql->bindParam(":auto_chasis",$datos['auto_chasis']);
                   $sql->bindParam(":auto_color",$datos['auto_color']);
