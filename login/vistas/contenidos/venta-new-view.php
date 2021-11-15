@@ -36,32 +36,32 @@ if ($_SESSION['privilegio_spm']!=1) {
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_tipo" class="bmd-label-floating">Tipo venta</label>
-							<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="venta_tipo_reg" id="venta_tipo" maxlength="20" required="">
+							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="venta_tipo_reg" id="venta_tipo" maxlength="20" required="">
 						</div>
 					</div>
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_monto" class="bmd-label-floating">Monto</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="venta_monto_reg" id="venta_monto" maxlength="35" >
+							<input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="venta_monto_reg" id="venta_monto" maxlength="35" >
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_cantidad" class="bmd-label-floating">Cantidad</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" maxlength="35">
+							<input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" maxlength="35">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="venta_descuento" class="bmd-label-floating">Descuento</label>
-							<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="venta_descuento_reg" id="venta_descuento" maxlength="20">
+							<input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="venta_descuento_reg" id="venta_descuento" maxlength="20">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="venta_total" class="bmd-label-floating">Total</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="venta_total_reg" id="venta_total" maxlength="190">
+							<input type="text" pattern="[0-9()+]{1,20}" class="form-control" name="venta_total_reg" id="venta_total" maxlength="190">
 						</div>
 					</div>
 				</div>
