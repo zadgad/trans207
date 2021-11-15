@@ -6,7 +6,18 @@
 
             /*--------- Modelo agregar cliente ---------*/
             protected static function agregar_cliente_modelo($datos){
-                  $sql=mainModel::conectar()->prepare("INSERT INTO cliente(cliente_dni,cliente_nombre,cliente_apellido,cliente_telefono,cliente_direccion,cliente_email,cliente_cliente,cliente_clave,cliente_estado,cliente_privilegio) VALUES(:DNI,:Nombre,:Apellido,:Telefono,:Direccion,:Email,:cliente,:Clave,:Estado,:Privilegio)");
+                  $sql=mainModel::conectar()->prepare("INSERT INTO cliente(
+cliente_ci,
+cliente_nombre,
+cliente_apellidos,
+cliente_usuario,
+cliente_telefono,
+cliente_nacimiento,
+cliente_categoria,
+cliente_admicion,
+cliente_monto,
+cliente_email,
+cliente_rol)");
 
                   $sql->bindParam(":DNI",$datos['DNI']);
                   $sql->bindParam(":Nombre",$datos['Nombre']);
@@ -50,10 +61,21 @@
              /*Modelo actualizar cliente*/
 
              protected static function actualizar_cliente_modelo($datos){
-                    $sql=mainModel::conectar()->prepare("UPDATE cliente SET cliente_dni=:DNI,cliente_nombre=:Nombre,cliente_apellido=:Apellido,cliente_telefono=:Telefono,cliente_direccion=:Direccion,cliente_email=:Email,cliente_cliente=:cliente,cliente_clave=:Clave,cliente_estado=:Estado,cliente_privilegio=:Privilegio WHERE cliente_id=:ID");
+                    $sql=mainModel::conectar()->prepare("UPDATE cliente SET 
+cliente_ci=:cliente_ci,
+cliente_nombre=:cliente_nombre,
+cliente_apellidos=:cliente_apellidos,
+cliente_usuario=:cliente_usuario,
+cliente_telefono=:cliente_telefono,
+cliente_nacimiento=:cliente_nacimiento,
+cliente_categoria=:cliente_categoria,
+cliente_admicion=:cliente_admicion,
+cliente_monto=:cliente_monto,
+cliente_email=:cliente_email,
+cliente_rol=:cliente_rol WHERE cliente_id=:cliente_id");
 
-                        $sql->bindParam(":DNI",$datos['DNI']);
-                        $sql->bindParam(":Nombre",$datos['Nombre']);
+                        $sql->bindParam(":cliente_id",$datos['cliente_id']);
+                        $sql->bindParam(":cliente_nombre",$datos['cliente_nombre']);
                         $sql->bindParam(":Apellido",$datos['Apellido']);
                         $sql->bindParam(":Telefono",$datos['Telefono']);
                         $sql->bindParam(":Direccion",$datos['Direccion']);

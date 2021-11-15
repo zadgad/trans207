@@ -13,7 +13,7 @@ class clienteControlador extends clienteModelo
     /*--------- Controlador agregar cliente ---------*/
     public function agregar_cliente_controlador()
     {
-        $dni       = mainModel::limpiar_cadena($_POST['cliente_dni_reg']);
+        $dni       = mainModel::limpiar_cadena($_POST['cliente_ci_reg']);
         $nombre    = mainModel::limpiar_cadena($_POST['cliente_nombre_reg']);
         $apellido  = mainModel::limpiar_cadena($_POST['cliente_apellido_reg']);
         $telefono  = mainModel::limpiar_cadena($_POST['cliente_telefono_reg']);
@@ -122,7 +122,7 @@ class clienteControlador extends clienteModelo
         }
 
         /*== Comprobando DNI ===*/
-        $check_dni = mainModel::ejecutar_consulta_simple("SELECT cliente_dni FROM cliente WHERE cliente_dni='$dni'");
+        $check_dni = mainModel::ejecutar_consulta_simple("SELECT cliente_ci FROM cliente WHERE cliente_ci='$dni'");
         if ($check_dni->rowCount() > 0) {
             $alerta = [
                 "Alerta" => "simple",
@@ -250,7 +250,7 @@ class clienteControlador extends clienteModelo
       $inicio= ($pagina>0) ? (($pagina*$registros)-$registros) : 0;
 
       if (isset($busqueda) && $busqueda!="") {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente WHERE ((cliente_id!='$id' AND cliente_id!='1') AND (cliente_dni LIKE '%$busqueda%' OR cliente_nombre LIKE '%$busqueda%' OR cliente_apellido LIKE '%$busqueda%' OR cliente_telefono LIKE '%$busqueda%' OR cliente_email LIKE '%$busqueda%'  OR cliente_cliente LIKE '%$busqueda%')) ORDER BY cliente_nombre ASC LIMIT $inicio,$registros";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente WHERE ((cliente_id!='$id' AND cliente_id!='1') AND (cliente_ci LIKE '%$busqueda%' OR cliente_nombre LIKE '%$busqueda%' OR cliente_apellido LIKE '%$busqueda%' OR cliente_telefono LIKE '%$busqueda%' OR cliente_email LIKE '%$busqueda%'  OR cliente_cliente LIKE '%$busqueda%')) ORDER BY cliente_nombre ASC LIMIT $inicio,$registros";
           
       }
       else{
@@ -288,7 +288,7 @@ class clienteControlador extends clienteModelo
                  foreach ($datos as $rows){
                    $tabla.='<tr class="text-center" >
                         <td>'.$contador.'</td>
-                        <td>'.$rows['cliente_dni'].'</td>
+                        <td>'.$rows['cliente_ci'].'</td>
                         <td>'.$rows['cliente_nombre'].' '.$rows['cliente_apellido'].'</td>
                         <td>'.$rows['cliente_telefono'].'</td>
                         <td>'.$rows['cliente_cliente'].'</td>
@@ -457,7 +457,7 @@ class clienteControlador extends clienteModelo
                 }
 
                 /**/
-                $dni=mainModel::limpiar_cadena($_POST['cliente_dni_up']);
+                $dni=mainModel::limpiar_cadena($_POST['cliente_ci_up']);
                 $nombre=mainModel::limpiar_cadena($_POST['cliente_nombre_up']);
                 $apellido=mainModel::limpiar_cadena($_POST['cliente_apellido_up']);
                 $telefono=mainModel::limpiar_cadena($_POST['cliente_telefono_up']);
@@ -616,10 +616,10 @@ class clienteControlador extends clienteModelo
                 exit();
              }
                       /*== Comprobando DNI ===*/
-                if ($dni!=$campos['cliente_dni']) {
+                if ($dni!=$campos['cliente_ci']) {
                     
                 
-                $check_dni = mainModel::ejecutar_consulta_simple("SELECT cliente_dni FROM cliente WHERE cliente_dni='$dni'");
+                $check_dni = mainModel::ejecutar_consulta_simple("SELECT cliente_ci FROM cliente WHERE cliente_ci='$dni'");
                 if ($check_dni->rowCount() > 0) {
                     $alerta = [
                         "Alerta" => "simple",
