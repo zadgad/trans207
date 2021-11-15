@@ -32,7 +32,7 @@ class autoControlador extends autoModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{6,15}", $auto_placa)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{3,15}", $auto_placa)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -43,7 +43,7 @@ class autoControlador extends autoModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{6,255}", $auto_chasis)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{3,255}", $auto_chasis)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -66,7 +66,7 @@ class autoControlador extends autoModelo
         }
 
         if ($auto_modelo != "") {
-            if (mainModel::verificar_datos("[0-9()+]{4,5}", $auto_modelo)) {
+            if (mainModel::verificar_datos("[0-9()+]{4,20}", $auto_modelo)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",

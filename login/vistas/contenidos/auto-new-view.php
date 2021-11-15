@@ -36,20 +36,20 @@ if ($_SESSION['privilegio_spm']!=1) {
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="auto_placa" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{6,20}" class="form-control" name="auto_placa_reg" id="auto_placa" maxlength="20" required="">
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{6,20}" class="form-control" name="auto_placa_reg" id="auto_placa" maxlength="20" required="">
 						</div>
 					</div>
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="auto_chasis" class="bmd-label-floating">Nombres</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_chasis_reg" id="auto_chasis" maxlength="100" >
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_chasis_reg" id="auto_chasis" maxlength="100" >
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="auto_color" class="bmd-label-floating">Color</label>
-							<input type="color" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,35}" class="form-control" name="auto_color_reg" id="auto_color" maxlength="35">
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{3,35}" class="form-control" name="auto_color_reg" id="auto_color" maxlength="35">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
