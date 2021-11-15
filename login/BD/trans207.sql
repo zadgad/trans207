@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2021 a las 04:38:47
+-- Tiempo de generación: 15-11-2021 a las 06:28:30
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -225,7 +225,8 @@ INSERT INTO `vehiculo` (`auto_id`, `auto_placa`, `auto_chasis`, `auto_color`, `a
 (7, '24545FGA', '7978784E8484', 'Azul', 2018, 'Kinj Loung', '2021-11-15 02:57:49', '2021-11-15 02:57:49'),
 (8, '45455FGA', '131545548E8484', 'Rosado', 2018, 'Nisan', '2021-11-15 02:57:49', '2021-11-15 02:57:49'),
 (9, '4555FGA', '55255499E8484', 'Rojo', 2018, 'Nisan', '2021-11-15 02:57:49', '2021-11-15 02:57:49'),
-(10, '1115FGA', '54544846E8484', 'Rojo', 2018, 'Nisan', '2021-11-15 02:57:49', '2021-11-15 02:57:49');
+(10, '1115FGA', '54544846E8484', 'Rojo', 2018, 'Nisan', '2021-11-15 02:57:49', '2021-11-15 02:57:49'),
+(11, '213123', 'joseluis', 'rojozoo', 2019, 'werwerwrwerw', '2021-11-14 23:46:46', '2021-11-14 23:46:46');
 
 -- --------------------------------------------------------
 
@@ -239,10 +240,17 @@ CREATE TABLE `venta` (
   `venta_monto` double NOT NULL,
   `venta_cantidad` int(11) NOT NULL,
   `venta_descuento` double NOT NULL,
-  `venta_total` datetime NOT NULL,
-  `create_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL
+  `venta_total` double NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`venta_id`, `venta_tipo`, `venta_monto`, `venta_cantidad`, `venta_descuento`, `venta_total`, `created_at`, `updated_at`) VALUES
+(1, 'fgffg', 3, 3, 4, 55, '2021-11-15 01:27:16', '2021-11-15 01:27:16');
 
 -- --------------------------------------------------------
 
@@ -356,13 +364,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
