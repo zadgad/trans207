@@ -32,7 +32,7 @@ class ventaControlador extends ventaModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $venta_tipo)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,190}", $venta_tipo)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -43,7 +43,7 @@ class ventaControlador extends ventaModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_monto)) {
+        if (mainModel::verificar_datos("[0-9]{1,20}", $venta_monto)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -54,23 +54,23 @@ class ventaControlador extends ventaModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_cantidad)) {
+        if (mainModel::verificar_datos("[0-9]{1,20}", $venta_cantidad)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El APELLIDO no coincide con el formato solicitado",
+                "Texto"  => "El cantidad no coincide con el formato solicitado",
                 "Tipo"   => "error"
             ];
             echo json_encode($alerta);
             exit();
         }
 
-        if ($telefono != "") {
-            if (mainModel::verificar_datos("[0-9()+]{8,20}",$venta_descuento)) {
+        if ($venta_descuento != "") {
+            if (mainModel::verificar_datos("[0-9]{1,20}",$venta_descuento)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El TELEFONO no coincide con el formato solicitado",
+                    "Texto"  => "El venta_descuento no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
@@ -79,7 +79,7 @@ class ventaControlador extends ventaModelo
         }
 
         if ($venta_total != "") {
-            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $venta_total)) {
+            if (mainModel::verificar_datos("[0-9]{1,20}", $venta_total)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -91,28 +91,20 @@ class ventaControlador extends ventaModelo
             }
         }
 
-        if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $venta)) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El NOMBRE DE venta no coincide con el formato solicitado",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        }
 
         /*coprobando privilegio*/
-        if ($privilegio < 1 || $privilegio > 3) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El privilegio seleccionado no es valido",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        }
+        session_start(['name'=>'SPM']);
+            if($_SESSION['privilegio_spm']!=1){
+                $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto"  => "No tienes los permisos necesarios para actualizar esta operacion",
+                        "Tipo"   => "error"
+                    ];
+                    echo json_encode($alerta);
+                    exit();
+
+            }
 
         $datos_venta_reg = [
             "venta_tipo"        => $venta_tipo,
@@ -385,7 +377,7 @@ class ventaControlador extends ventaModelo
                     }
 
               /*== Verificando integridad de los datos ==*/
-            if (mainModel::verificar_datos("[0-9-]{10,20}", $venta_tipo)) {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $venta_tipo)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -396,7 +388,7 @@ class ventaControlador extends ventaModelo
                 exit();
             }
 
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_monto)) {
+            if (mainModel::verificar_datos("[0-9]", $venta_monto)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -407,7 +399,7 @@ class ventaControlador extends ventaModelo
                 exit();
             }
 
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_cantidad)) {
+            if (mainModel::verificar_datos("[0-9]", $venta_cantidad)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -418,12 +410,12 @@ class ventaControlador extends ventaModelo
                 exit();
             }
 
-            if ($telefono != "") {
-                if (mainModel::verificar_datos("[0-9()+]{8,20}",$venta_descuento)) {
+            if ($venta_descuento != "") {
+                if (mainModel::verificar_datos("[0-9]",$venta_descuento)) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El TELEFONO no coincide con el formato solicitado",
+                        "Texto"  => "El venta_descuento no coincide con el formato solicitado",
                         "Tipo"   => "error"
                     ];
                     echo json_encode($alerta);
@@ -432,7 +424,7 @@ class ventaControlador extends ventaModelo
             }
 
             if ($venta_total != "") {
-                if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $venta_total)) {
+                if (mainModel::verificar_datos("[0-9]", $venta_total)) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",

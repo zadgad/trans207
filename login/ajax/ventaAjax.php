@@ -2,7 +2,7 @@
     $peticionAjax=true;
     require_once "../config/APP.php";
 
-    if(isset($_POST['venta_dni_reg']) || isset($_POST['venta_id_del']) || isset($_POST['venta_id_up'])){
+    if(isset($_POST['venta_tipo_reg']) || isset($_POST['venta_id_del']) || isset($_POST['venta_id_up'])){
 
         /*--------- Instancia al controlador ---------*/
         require_once "../controladores/ventaControlador.php";
@@ -10,7 +10,7 @@
 
 
         /*--------- Agregar un venta ---------*/
-        if(isset($_POST['venta_dni_reg']) && isset($_POST['venta_nombre_reg'])){
+        if(isset($_POST['venta_tipo_reg']) && isset($_POST['venta_monto_reg'])){
             echo $ins_venta->agregar_venta_controlador();
         }
     

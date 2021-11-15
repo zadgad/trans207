@@ -56,32 +56,32 @@ $datos_venta=$ins_venta->datos_venta_controlador("Unico",$pagina[1]);
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_tipo" class="bmd-label-floating">Tipo venta</label>
-							<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="venta_tipo_up" id="venta_tipo" maxlength="20" value="<?php echo $campos['venta_tipo']; ?>">
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="venta_tipo_up" id="venta_tipo" maxlength="255" value="<?php echo $campos['venta_tipo']; ?>">
 						</div>
 					</div>
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_monto" class="bmd-label-floating">Monto</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="venta_monto_up" id="venta_monto" maxlength="35" value="<?php echo $campos['venta_monto']; ?>">
+							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_monto_up" id="venta_monto" value="<?php echo $campos['venta_monto']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_cantidad" class="bmd-label-floating">Cantidad</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="venta_cantidad_up" id="venta_cantidad" maxlength="35" value="<?php echo $campos['venta_cantidad']; ?>">
+							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_cantidad_up" id="venta_cantidad"  value="<?php echo $campos['venta_cantidad']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="venta_descuento" class="bmd-label-floating">Descuento</label>
-							<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="venta_descuento_up" id="venta_descuento" maxlength="20" value="<?php echo $campos['venta_descuento']; ?>">
+							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_descuento_up" id="venta_descuento" value="<?php echo $campos['venta_descuento']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="venta_total" class="bmd-label-floating">Total</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="venta_total_up" id="venta_total" maxlength="190" value="<?php echo $campos['venta_total']; ?>">
+							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_total_up" id="venta_total" value="<?php echo $campos['venta_total']; ?>">
 						</div>
 					</div>
 				</div>
