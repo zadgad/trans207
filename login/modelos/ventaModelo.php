@@ -38,7 +38,7 @@
                                   
                                 }
                         elseif ($tipo=="Conteo"){
-                              $sql=mainModel::conectar()->prepare("SELECT venta_id FROM venta WHERE venta_id!='1'");
+                              $sql=mainModel::conectar()->prepare("SELECT venta_id FROM venta ");
                                 }
                               $sql->execute();
                               return $sql;
@@ -54,7 +54,7 @@
                         $sql->bindParam(":venta_cantidad",$datos['venta_cantidad']);
                         $sql->bindParam(":venta_descuento",$datos['venta_descuento']);
                         $sql->bindParam(":venta_total",$datos['venta_total']);
-                        $sql->bindParam(":venta_id",$datos['ID']);
+                        $sql->bindParam(":venta_id",$datos['venta_id']);
                         $sql->execute();
                          return $sql;
 

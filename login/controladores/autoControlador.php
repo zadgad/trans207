@@ -340,12 +340,12 @@ class autoControlador extends autoModelo
 
             //Comprobar el auto en la BD
 
-            $check_auto=mainModel::ejecutar_consulta_simple("SELECT * FROM vehiculos WHERE auto_id='$id'");
+            $check_auto=mainModel::ejecutar_consulta_simple("SELECT * FROM vehiculo WHERE auto_id='$id'");
                 if ( $check_auto->rowCount()<=0) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "No hemos encontrado el auto en ele sistema",
+                        "Texto"  => "No hemos encontrado el auto en el sistema",
                         "Tipo"   => "error"
                     ];
                     echo json_encode($alerta);
@@ -377,7 +377,7 @@ class autoControlador extends autoModelo
 
              
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{6,15}", $auto_placa)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $auto_placa)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -388,7 +388,7 @@ class autoControlador extends autoModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{6,255}", $auto_chasis)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,255}", $auto_chasis)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -423,7 +423,7 @@ class autoControlador extends autoModelo
             }
         }
 
-        if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $auto_marca)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{3,35}", $auto_marca)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -447,16 +447,6 @@ class autoControlador extends autoModelo
 
             }
 
-           if($check_cuenta->rowCount()<=0){
-             $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Nombre y Clave de administrador no validos",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-           }
             /*Preparandos datos para  enviarlos al modelo*/
 
             $datos_auto_up=[

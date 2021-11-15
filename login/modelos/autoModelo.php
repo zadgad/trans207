@@ -36,7 +36,7 @@
                                   
                                 }
                         elseif ($tipo=="Conteo"){
-                              $sql=mainModel::conectar()->prepare("SELECT auto_id FROM vehiculo WHERE auto_id!='1'");
+                              $sql=mainModel::conectar()->prepare("SELECT auto_id FROM vehiculo");
                                 }
                               $sql->execute();
                               return $sql;

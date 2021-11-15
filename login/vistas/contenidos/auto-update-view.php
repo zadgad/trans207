@@ -55,32 +55,32 @@ $datos_auto=$ins_auto->datos_auto_controlador("Unico",$pagina[1]);
 				<div class="row">
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="auto_placa" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_placa_up" id="auto_placa" maxlength="20" value="<?php echo $campos['auto_placa']; ?>">
+							<label for="auto_placa" class="bmd-label-floating">Placa</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="auto_placa_up" id="auto_placa" maxlength="255" value="<?php echo $campos['auto_placa']; ?>">
 						</div>
 					</div>
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="auto_chasis" class="bmd-label-floating">Nombres</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_chasis_up" id="auto_chasis" maxlength="35" value="<?php echo $campos['auto_chasis']; ?>">
+							<label for="auto_chasis" class="bmd-label-floating">Chasis</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="auto_chasis_up" id="auto_chasis" maxlength="35" value="<?php echo $campos['auto_chasis']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="auto_color" class="bmd-label-floating">Apellidos</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="auto_color_up" id="auto_color" maxlength="35" value="<?php echo $campos['auto_color']; ?>">
+							<label for="auto_color" class="bmd-label-floating">Color</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="auto_color_up" id="auto_color" maxlength="35" value="<?php echo $campos['auto_color']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="auto_modelo" class="bmd-label-floating">Teléfono</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_modelo_up" id="auto_modelo" maxlength="20" value="<?php echo $campos['auto_modelo']; ?>">
+							<label for="auto_modelo" class="bmd-label-floating">Modelo</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="auto_modelo_up" id="auto_modelo" maxlength="20" value="<?php echo $campos['auto_modelo']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="auto_marca" class="bmd-label-floating">Dirección</label>
+							<label for="auto_marca" class="bmd-label-floating">Marca</label>
 							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="auto_marca_up" id="auto_marca" maxlength="190" value="<?php echo $campos['auto_marca']; ?>">
 						</div>
 					</div>
