@@ -91,7 +91,7 @@ class autoControlador extends autoModelo
 
 
         /*== Comprobando placa ===*/
-        $check_dni = mainModel::ejecutar_consulta_simple("SELECT auto_dni FROM vehicle WHERE auto_placa='$auto_placa'");
+        $check_dni = mainModel::ejecutar_consulta_simple("SELECT auto_placa FROM vehiculo WHERE auto_placa='$auto_placa'");
         if ($check_dni->rowCount() > 0) {
             $alerta = [
                 "Alerta" => "simple",
@@ -105,7 +105,7 @@ class autoControlador extends autoModelo
 
         }
         /*== Comprobando auto ===*/
-        $check_auto = mainModel::ejecutar_consulta_simple("SELECT auto_chasis FROM vehicle WHERE auto_chasis='$auto_chasis'");
+        $check_auto = mainModel::ejecutar_consulta_simple("SELECT auto_chasis FROM vehiculo WHERE auto_chasis='$auto_chasis'");
         if ($check_auto->rowCount() > 0) {
             $alerta = [
                 "Alerta" => "simple",
@@ -163,11 +163,11 @@ class autoControlador extends autoModelo
       $inicio= ($pagina>0) ? (($pagina*$registros)-$registros) : 0;
 
       if (isset($busqueda) && $busqueda!="") {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehicle WHERE ((auto_id!='$id') AND (auto_placa LIKE '%$busqueda%' OR auto_chasis LIKE '%$busqueda%' OR auto_color LIKE '%$busqueda%' OR auto_modelo LIKE '%$busqueda%' OR auto_marca LIKE '%$busqueda%')) ORDER BY auto_placa ASC LIMIT $inicio,$registros";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo WHERE ((auto_id!='$id') AND (auto_placa LIKE '%$busqueda%' OR auto_chasis LIKE '%$busqueda%' OR auto_color LIKE '%$busqueda%' OR auto_modelo LIKE '%$busqueda%' OR auto_marca LIKE '%$busqueda%')) ORDER BY auto_placa ASC LIMIT $inicio,$registros";
           
       }
       else{
-       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehicle WHERE auto_id!='$id'  ORDER BY auto_placa ASC LIMIT $inicio,$registros";
+       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo WHERE auto_id!='$id'  ORDER BY auto_placa ASC LIMIT $inicio,$registros";
       }
 
 
@@ -267,7 +267,7 @@ class autoControlador extends autoModelo
          }
          /*Comprrobando el auto en BD*/
 
-         $check_auto=mainModel::ejecutar_consulta_simple("SELECT auto_id FROM vehicle WHERE auto_id='$id'");
+         $check_auto=mainModel::ejecutar_consulta_simple("SELECT auto_id FROM vehiculo WHERE auto_id='$id'");
 
          if ($check_auto->rowCount()<=0) {
              $alerta = [
@@ -340,7 +340,7 @@ class autoControlador extends autoModelo
 
             //Comprobar el auto en la BD
 
-            $check_auto=mainModel::ejecutar_consulta_simple("SELECT * FROM vehicles WHERE auto_id='$id'");
+            $check_auto=mainModel::ejecutar_consulta_simple("SELECT * FROM vehiculos WHERE auto_id='$id'");
                 if ( $check_auto->rowCount()<=0) {
                     $alerta = [
                         "Alerta" => "simple",
@@ -376,7 +376,7 @@ class autoControlador extends autoModelo
                     }
 
              
-/*== Verificando integridad de los datos ==*/
+        /*== Verificando integridad de los datos ==*/
         if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{6,15}", $auto_placa)) {
             $alerta = [
                 "Alerta" => "simple",
