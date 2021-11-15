@@ -2,67 +2,59 @@
       
       require_once "mainModel.php";
 
-      class usuarioModelo extends mainModel{
+      class ventaModelo extends mainModel{
 
-            /*--------- Modelo agregar usuario ---------*/
-            protected static function agregar_usuario_modelo($datos){
-                  $sql=mainModel::conectar()->prepare("INSERT INTO usuario(usuario_dni,usuario_nombre,usuario_apellido,usuario_telefono,usuario_direccion,usuario_email,usuario_usuario,usuario_clave,usuario_estado,usuario_privilegio) VALUES(:DNI,:Nombre,:Apellido,:Telefono,:Direccion,:Email,:Usuario,:Clave,:Estado,:Privilegio)");
+            /*--------- Modelo agregar venta ---------*/
+            //venta_id	venta_tipo	venta_monto	venta_cantidad	venta_descuento	venta_total	created_at	updated_at
 
-                  $sql->bindParam(":DNI",$datos['DNI']);
-                  $sql->bindParam(":Nombre",$datos['Nombre']);
-                  $sql->bindParam(":Apellido",$datos['Apellido']);
-                  $sql->bindParam(":Telefono",$datos['Telefono']);
-                  $sql->bindParam(":Direccion",$datos['Direccion']);
-                  $sql->bindParam(":Email",$datos['Email']);
-                  $sql->bindParam(":Usuario",$datos['Usuario']);
-                  $sql->bindParam(":Clave",$datos['Clave']);
-                  $sql->bindParam(":Estado",$datos['Estado']);
-                  $sql->bindParam(":Privilegio",$datos['Privilegio']);
+            protected static function agregar_venta_modelo($datos){
+                  $sql=mainModel::conectar()->prepare("INSERT INTO venta(venta_tipo,venta_monto	,venta_cantidad,	venta_descuento,	venta_total) VALUES(:venta_tipo,:venta_monto,:venta_cantidad,:venta_descuento,	:venta_total)");
+
+                  $sql->bindParam(":venta_tipo",$datos['venta_tipo']);
+                  $sql->bindParam(":venta_monto",$datos['venta_monto']);
+                  $sql->bindParam(":venta_cantidad",$datos['venta_cantidad']);
+                  $sql->bindParam(":venta_descuento",$datos['venta_descuento']);
+                  $sql->bindParam(":venta_total",$datos['venta_total']);
                   $sql->execute();
 
                   return $sql;
 
             }
-             /*--------- Modelo eliminar usuario ---------*/
-             protected static function eliminar_usuario_modelo($id){
-                  $sql=mainModel::conectar()->prepare("DELETE FROM usuario WHERE usuario_id=:ID");
+             /*--------- Modelo eliminar venta ---------*/
+             protected static function eliminar_venta_modelo($id){
+                  $sql=mainModel::conectar()->prepare("DELETE FROM venta WHERE venta_id=:venta_id");
 
-                  $sql->bindParam(":ID",$id);
+                  $sql->bindParam(":venta_id",$id);
                   $sql->execute();
 
                   return $sql;
 
              }
-             /*Modelo datos usuario*/
-             protected static function datos_usuario_modelo($tipo,$id){
+             /*Modelo datos venta*/
+             protected static function datos_venta_modelo($tipo,$id){
                         if ($tipo=="Unico"){
-                              $sql=mainModel::conectar()->prepare("SELECT * FROM usuario WHERE usuario_id=:ID");
-                               $sql->bindParam(":ID",$id);
+                              $sql=mainModel::conectar()->prepare("SELECT * FROM venta WHERE venta_id=:venta_id");
+                               $sql->bindParam(":venta_id",$id);
                                   
                                 }
                         elseif ($tipo=="Conteo"){
-                              $sql=mainModel::conectar()->prepare("SELECT usuario_id FROM usuario WHERE usuario_id!='1'");
+                              $sql=mainModel::conectar()->prepare("SELECT venta_id FROM venta WHERE venta_id!='1'");
                                 }
                               $sql->execute();
                               return $sql;
 
              }
-             /*Modelo actualizar usuario*/
+             /*Modelo actualizar venta*/
 
-             protected static function actualizar_usuario_modelo($datos){
-                    $sql=mainModel::conectar()->prepare("UPDATE usuario SET usuario_dni=:DNI,usuario_nombre=:Nombre,usuario_apellido=:Apellido,usuario_telefono=:Telefono,usuario_direccion=:Direccion,usuario_email=:Email,usuario_usuario=:Usuario,usuario_clave=:Clave,usuario_estado=:Estado,usuario_privilegio=:Privilegio WHERE usuario_id=:ID");
+             protected static function actualizar_venta_modelo($datos){
+                    $sql=mainModel::conectar()->prepare("UPDATE venta SET venta_tipo=:venta_tipo,venta_monto=:venta_monto,venta_cantidad=:venta_cantidad,venta_descuento=:venta_descuento,venta_total=:venta_total WHERE venta_id=:venta_id");
 
-                        $sql->bindParam(":DNI",$datos['DNI']);
-                        $sql->bindParam(":Nombre",$datos['Nombre']);
-                        $sql->bindParam(":Apellido",$datos['Apellido']);
-                        $sql->bindParam(":Telefono",$datos['Telefono']);
-                        $sql->bindParam(":Direccion",$datos['Direccion']);
-                        $sql->bindParam(":Email",$datos['Email']);
-                        $sql->bindParam(":Usuario",$datos['Usuario']);
-                        $sql->bindParam(":Clave",$datos['Clave']);
-                        $sql->bindParam(":Estado",$datos['Estado']);
-                        $sql->bindParam(":Privilegio",$datos['Privilegio']);
-                        $sql->bindParam(":ID",$datos['ID']);
+                        $sql->bindParam(":venta_tipo",$datos['venta_tipo']);
+                        $sql->bindParam(":venta_monto",$datos['venta_monto']);
+                        $sql->bindParam(":venta_cantidad",$datos['venta_cantidad']);
+                        $sql->bindParam(":venta_descuento",$datos['venta_descuento']);
+                        $sql->bindParam(":venta_total",$datos['venta_total']);
+                        $sql->bindParam(":venta_id",$datos['ID']);
                         $sql->execute();
                          return $sql;
 

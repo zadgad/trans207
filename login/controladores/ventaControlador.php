@@ -13,21 +13,14 @@ class ventaControlador extends ventaModelo
     /*--------- Controlador agregar venta ---------*/
     public function agregar_venta_controlador()
     {
-        $dni       = mainModel::limpiar_cadena($_POST['venta_dni_reg']);
-        $nombre    = mainModel::limpiar_cadena($_POST['venta_nombre_reg']);
-        $apellido  = mainModel::limpiar_cadena($_POST['venta_apellido_reg']);
-        $telefono  = mainModel::limpiar_cadena($_POST['venta_telefono_reg']);
-        $direccion = mainModel::limpiar_cadena($_POST['venta_direccion_reg']);
-
-        $venta = mainModel::limpiar_cadena($_POST['venta_venta_reg']);
-        $email   = mainModel::limpiar_cadena($_POST['venta_email_reg']);
-        $clave1  = mainModel::limpiar_cadena($_POST['venta_clave_1_reg']);
-        $clave2  = mainModel::limpiar_cadena($_POST['venta_clave_2_reg']);
-
-        $privilegio = mainModel::limpiar_cadena($_POST['venta_privilegio_reg']);
+        $venta_tipo       = mainModel::limpiar_cadena($_POST['venta_tipo_reg']);
+        $venta_monto    = mainModel::limpiar_cadena($_POST['venta_monto_reg']);
+        $venta_cantidad  = mainModel::limpiar_cadena($_POST['venta_cantidad_reg']);
+        $venta_descuento  = mainModel::limpiar_cadena($_POST['venta_descuento_reg']);
+        $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
 
         /*== comprobar campos vacios ==*/
-        if ($dni == "" || $nombre == "" || $apellido == "" || $venta == "" || $clave1 == "" || $clave2 == "") {
+        if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == "") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -39,7 +32,7 @@ class ventaControlador extends ventaModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $dni)) {
+        if (mainModel::verificar_datos("[0-9-]{10,20}", $venta_tipo)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -50,7 +43,7 @@ class ventaControlador extends ventaModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_monto)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -61,7 +54,7 @@ class ventaControlador extends ventaModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_cantidad)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -73,7 +66,7 @@ class ventaControlador extends ventaModelo
         }
 
         if ($telefono != "") {
-            if (mainModel::verificar_datos("[0-9()+]{8,20}", $telefono)) {
+            if (mainModel::verificar_datos("[0-9()+]{8,20}",$venta_descuento)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -85,8 +78,8 @@ class ventaControlador extends ventaModelo
             }
         }
 
-        if ($direccion != "") {
-            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
+        if ($venta_total != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $venta_total)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -109,84 +102,6 @@ class ventaControlador extends ventaModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave1) || mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave2)) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "Las CLAVES no coinciden con el formato solicitado",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-
-        }
-
-        /*== Comprobando DNI ===*/
-        $check_dni = mainModel::ejecutar_consulta_simple("SELECT venta_dni FROM venta WHERE venta_dni='$dni'");
-        if ($check_dni->rowCount() > 0) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El DNI ingresado ya se encuentra registrado en el sistema",
-                "Tipo"   => "error"
-            ];
-
-            echo json_encode($alerta);
-            exit();
-
-        }
-        /*== Comprobando venta ===*/
-        $check_user = mainModel::ejecutar_consulta_simple("SELECT venta_venta FROM venta WHERE venta_venta='$venta'");
-        if ($check_user->rowCount() > 0) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El Nombre de venta ingresado ya se encuentra registrado en el sistema",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        }
-        /*== Comprobando email ===*/
-
-        if ($email != "") {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-                $check_email = mainModel::ejecutar_consulta_simple("SELECT venta_email FROM venta WHERE venta_email='$email'");
-                if ($check_email->rowCount() > 0) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El email ingresado ya se encuentra registrado en el sistema",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-                }
-            } else {
-                $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "Ha ingresado un correo no valido",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-            }
-        }
-
-        if ($clave1 != $clave2) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "Las claves que acaba de ingresar no coinciden",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        } else {
-            $clave = mainModel::encryption($clave1);
-        }
         /*coprobando privilegio*/
         if ($privilegio < 1 || $privilegio > 3) {
             $alerta = [
@@ -200,16 +115,11 @@ class ventaControlador extends ventaModelo
         }
 
         $datos_venta_reg = [
-            "DNI"        => $dni,
-            "Nombre"     => $nombre,
-            "Apellido"   => $apellido,
-            "Telefono"   => $telefono,
-            "Direccion"  => $direccion,
-            "Email"      => $email,
-            "venta"    => $venta,
-            "Clave"      => $clave,
-            "Estado"     => "Activa",
-            "Privilegio" => $privilegio
+            "venta_tipo"        => $venta_tipo,
+            "venta_monto"     => $venta_monto,
+            "venta_cantidad"   => $venta_cantidad,
+            "venta_descuento"   =>$venta_descuento,
+            "venta_total"  => $venta_total,
         ];
         $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg);
         if ($agregar_venta->rowCount() == 1) {
@@ -250,11 +160,11 @@ class ventaControlador extends ventaModelo
       $inicio= ($pagina>0) ? (($pagina*$registros)-$registros) : 0;
 
       if (isset($busqueda) && $busqueda!="") {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM venta WHERE ((venta_id!='$id' AND venta_id!='1') AND (venta_dni LIKE '%$busqueda%' OR venta_nombre LIKE '%$busqueda%' OR venta_apellido LIKE '%$busqueda%' OR venta_telefono LIKE '%$busqueda%' OR venta_email LIKE '%$busqueda%'  OR venta_venta LIKE '%$busqueda%')) ORDER BY venta_nombre ASC LIMIT $inicio,$registros";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM venta WHERE ((venta_id!='$id') AND (venta_tipo LIKE '%$busqueda%' OR venta_monto LIKE '%$busqueda%' OR venta_cantidad LIKE '%$busqueda%' OR venta_descuento LIKE '%$busqueda%' OR venta_total LIKE '%$busqueda%')) ORDER BY venta_monto ASC LIMIT $inicio,$registros";
           
       }
       else{
-       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM venta WHERE venta_id!='$id' AND venta_id!='1' ORDER BY venta_nombre ASC LIMIT $inicio,$registros";
+       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM venta WHERE venta_id!='$id' ORDER BY venta_monto ASC LIMIT $inicio,$registros";
       }
 
 
@@ -272,11 +182,11 @@ class ventaControlador extends ventaModelo
                 <thead>
                     <tr class="text-center roboto-medium">
                         <th>#</th>
-                        <th>DNI</th>
-                        <th>NOMBRE</th>
-                        <th>TELÉFONO</th>
-                        <th>venta</th>
-                        <th>EMAIL</th>
+                        <th>TIPO</th>
+                        <th>MONTO</th>
+                        <th>CANTIDAD</th>
+                        <th>DESCUENTO</th>
+                        <th>TOTAL</th>
                         <th>ACTUALIZAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -289,10 +199,10 @@ class ventaControlador extends ventaModelo
                    $tabla.='<tr class="text-center" >
                         <td>'.$contador.'</td>
                         <td>'.$rows['venta_dni'].'</td>
-                        <td>'.$rows['venta_nombre'].' '.$rows['venta_apellido'].'</td>
-                        <td>'.$rows['venta_telefono'].'</td>
+                        <td>'.$rows['venta_monto'].' '.$rows['venta_cantidad'].'</td>
+                        <td>'.$rows['venta_descuento'].'</td>
                         <td>'.$rows['venta_venta'].'</td>
-                        <td>'.$rows['venta_email'].'</td>
+                        <td>'.$rows['venta_total'].'</td>
                         <td>
                             <a href="'.SERVERURL.'user-update/'.mainModel::encryption($rows['venta_id']).'/" class="btn btn-success">
                                     <i class="fas fa-sync-alt"></i> 
@@ -367,21 +277,7 @@ class ventaControlador extends ventaModelo
                  exit();
              
          }
-             /*Comprrobando los prestamos*/
-
-         $check_prestamos=mainModel::ejecutar_consulta_simple("SELECT venta_id FROM prestamo WHERE venta_id='$id' LIMIT 1");
-
-         if ($check_prestamos->rowCount()>0) {
-             $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "No podemos eliminar este venta debido a que tiene prestamos asociados, recomendamos deshabilitar el venta si ya no sera utilizado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                 exit();
-             
-         }
+           
          /*comprobando privilegios*/
 
          session_start(['name'=>'SPM']);
@@ -457,22 +353,12 @@ class ventaControlador extends ventaModelo
                 }
 
                 /**/
-                $dni=mainModel::limpiar_cadena($_POST['venta_dni_up']);
-                $nombre=mainModel::limpiar_cadena($_POST['venta_nombre_up']);
-                $apellido=mainModel::limpiar_cadena($_POST['venta_apellido_up']);
-                $telefono=mainModel::limpiar_cadena($_POST['venta_telefono_up']);
-                $direccion=mainModel::limpiar_cadena($_POST['venta_direccion_up']);
-                $venta=mainModel::limpiar_cadena($_POST['venta_venta_up']);
-                $email=mainModel::limpiar_cadena($_POST['venta_email_up']);
-                
-                if (isset($_POST['venta_estado_up']))
-                {
-                $estado=mainModel::limpiar_cadena($_POST['venta_estado_up']);
-                }
-                else {
-                    $estado=$campos['venta_estado'];
-                } 
-
+                $venta_tipo=mainModel::limpiar_cadena($_POST['venta_dni_up']);
+                $venta_monto=mainModel::limpiar_cadena($_POST['venta_monto_up']);
+                $venta_cantidad=mainModel::limpiar_cadena($_POST['venta_cantidad_up']);
+               $venta_descuento=mainModel::limpiar_cadena($_POST['venta_descuento_up']);
+                $venta_total=mainModel::limpiar_cadena($_POST['venta_total_up']);
+               
                 if (isset($_POST['venta_privilegio_up']))
                 {
                 $privilegio=mainModel::limpiar_cadena($_POST['venta_privilegio_up']);
@@ -487,7 +373,7 @@ class ventaControlador extends ventaModelo
                  $tipo_cuenta=mainModel::limpiar_cadena($_POST['tipo_cuenta']);
 
                    /*== comprobar campos vacios ==*/
-                    if ($dni == "" || $nombre == "" || $apellido == "" || $venta == "" || $admin_venta == "" || $admin_clave == "") {
+                    if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == "" || $venta == "" || $admin_venta == "") {
                         $alerta = [
                             "Alerta" => "simple",
                             "Titulo" => "Ocurrió un error inesperado",
@@ -499,7 +385,7 @@ class ventaControlador extends ventaModelo
                     }
 
               /*== Verificando integridad de los datos ==*/
-            if (mainModel::verificar_datos("[0-9-]{10,20}", $dni)) {
+            if (mainModel::verificar_datos("[0-9-]{10,20}", $venta_tipo)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -510,7 +396,7 @@ class ventaControlador extends ventaModelo
                 exit();
             }
 
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
+            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_monto)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -521,7 +407,7 @@ class ventaControlador extends ventaModelo
                 exit();
             }
 
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
+            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $venta_cantidad)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -533,7 +419,7 @@ class ventaControlador extends ventaModelo
             }
 
             if ($telefono != "") {
-                if (mainModel::verificar_datos("[0-9()+]{8,20}", $telefono)) {
+                if (mainModel::verificar_datos("[0-9()+]{8,20}",$venta_descuento)) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
@@ -545,8 +431,8 @@ class ventaControlador extends ventaModelo
                 }
             }
 
-            if ($direccion != "") {
-                if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
+            if ($venta_total != "") {
+                if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $venta_total)) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
@@ -557,43 +443,6 @@ class ventaControlador extends ventaModelo
                     exit();
                 }
             }
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $venta)) {
-                $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El NOMBRE DE venta no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-            }
-
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $admin_venta)) {
-                $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El NOMBRE DE venta no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-            }
-             
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $admin_clave)) {
-                $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "Tu CLAVE no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-            }
-
-             $admin_clave=mainModel::encryption($admin_clave);
              if ($privilegio <1 || $privilegio>3) {
                  $alerta = [
                     "Alerta" => "simple",
@@ -604,117 +453,9 @@ class ventaControlador extends ventaModelo
                 echo json_encode($alerta);
                 exit();
              }
-
-             if ($estado!= "Activa" && $estado!= "Deshabilitado") {
-                 $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El estado de la cuenta no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-             }
-                      /*== Comprobando DNI ===*/
-                if ($dni!=$campos['venta_dni']) {
-                    
-                
-                $check_dni = mainModel::ejecutar_consulta_simple("SELECT venta_dni FROM venta WHERE venta_dni='$dni'");
-                if ($check_dni->rowCount() > 0) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El DNI ingresado ya se encuentra registrado en el sistema",
-                        "Tipo"   => "error"
-                    ];
-
-                    echo json_encode($alerta);
-                    exit();
-                 }
-                }
-                /*== Comprobando venta ===*/
-                if($venta!=$campos['venta_venta']){
-
-                $check_user = mainModel::ejecutar_consulta_simple("SELECT venta_venta FROM venta WHERE venta_venta='$venta'");
-                if ($check_user->rowCount() > 0) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El Nombre de venta ingresado ya se encuentra registrado en el sistema",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                 }
-                }
-                /*== Comprobando Email ===*/
-                if ($email!=$campos['venta_email'] && $email!=""){
-                    if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-                        $check_email = mainModel::ejecutar_consulta_simple("SELECT venta_email FROM venta WHERE venta_email='$email'");
-                        if ($check_email->rowCount()>0) {
-                        $alerta = [
-                            "Alerta" => "simple",
-                            "Titulo" => "Ocurrió un error inesperado",
-                            "Texto"  => "El nuevo email ingresado ya se encuentra registrado en el sistema",
-                            "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                    }
-                    }else{
-                        $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Ha ingresado un correo no valido",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                    }
-                    
-                }
-
-           /*--Comprobando claves*/
-           if ($_POST['venta_clave_nueva_1']!= "" || $_POST['venta_clave_nueva_2']!= "") {
-               if($_POST['venta_clave_nueva_1']!=$_POST['venta_clave_nueva_2']){
-                $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Las nuevas claves ingresadas no coinciden",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-               }
-               else{
-               if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$_POST['venta_clave_nueva_1']) || mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$_POST['venta_clave_nueva_2'])){
-                $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Las nuevas claves no coinciden  con el formato solicitado",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-               }
-               $clave=mainModel::encryption($_POST['venta_clave_nueva_1']);
-               }
-           }
-           else{
-            $clave=$campos['venta_clave'];
-
-           }
+               
           /*COMPROBANDO LAS CREDIDENCIALES PARA ACTUALIZACION DATOS*/
-           if($tipo_cuenta=="Propia")
-           {
-               $check_cuenta = mainModel::ejecutar_consulta_simple("SELECT venta_id FROM venta WHERE venta_venta='$admin_venta' AND venta_clave='$admin_clave' AND venta_id='$id'");
-           }else
-           {
-            session_start(['name'=>'SPM']);
+         session_start(['name'=>'SPM']);
             if($_SESSION['privilegio_spm']!=1){
                 $alerta = [
                         "Alerta" => "simple",
@@ -726,32 +467,14 @@ class ventaControlador extends ventaModelo
                     exit();
 
             }
-            $check_cuenta =mainModel::ejecutar_consulta_simple("SELECT venta_id FROM venta WHERE venta_venta='$admin_venta' AND venta_clave='$admin_clave'");
-           }
-
-           if($check_cuenta->rowCount()<=0){
-             $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Nombre y Clave de administrador no validos",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-           }
             /*Preparandos datos para  enviarlos al modelo*/
 
-            $datos_venta_up=["DNI"=>$dni,
-                               "Nombre"=>$nombre,
-                               "Apellido"=>$apellido,
-                               "Telefono"=>$telefono,
-                               "Direccion"=>$direccion,
-                               "Email"=>$email,
-                               "venta"=>$venta,
-                               "Clave"=>$clave,
-                               "Estado"=>$estado,
-                               "Privilegio"=>$privilegio,
-                               "ID"=>$id
+            $datos_venta_up=["venta_tipo"=>$venta_tipo,
+                               "venta_monto"=>$venta_monto,
+                               "venta_cantidad"=>$venta_cantidad,
+                               "venta_descuento"=>$venta_descuento,
+                               "venta_total"=>$venta_total,
+                               "venta_id"=>$id
                                ];
                 if(ventaModelo::actualizar_venta_modelo($datos_venta_up)){
                   $alerta = [
