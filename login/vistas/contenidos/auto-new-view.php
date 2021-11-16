@@ -35,14 +35,14 @@ if ($_SESSION['privilegio_spm']!=1) {
 				<div class="row">
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="auto_placa" class="bmd-label-floating">DNI</label>
+							<label for="auto_placa" class="bmd-label-floating">Placa</label>
 							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{6,20}" class="form-control" name="auto_placa_reg" id="auto_placa" maxlength="20" required="">
 						</div>
 					</div>
-					
+				
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="auto_chasis" class="bmd-label-floating">Nombres</label>
+							<label for="auto_chasis" class="bmd-label-floating">Chasis</label>
 							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,100}" class="form-control" name="auto_chasis_reg" id="auto_chasis" maxlength="100" >
 						</div>
 					</div>

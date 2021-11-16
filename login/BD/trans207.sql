@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2021 a las 06:28:30
+-- Tiempo de generación: 16-11-2021 a las 06:45:30
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -36,13 +36,13 @@ CREATE TABLE `chofer` (
   `chofer_usuario` varchar(200) NOT NULL,
   `chofer_telefono` int(11) NOT NULL,
   `chofer_nacimiento` date NOT NULL,
-  `chofer_categoria` char(2) NOT NULL,
+  `chofer_categoria` char(255) NOT NULL,
   `chofer_admincion` date NOT NULL,
   `chofer_monto` int(11) NOT NULL,
   `chofer_email` varchar(200) NOT NULL,
   `chofer_rol` varchar(20) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cliente_cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -97,20 +97,20 @@ CREATE TABLE `cliente` (
   `cliente_usuario` varchar(200) NOT NULL,
   `cliente_telefono` int(11) NOT NULL,
   `cliente_nacimiento` date NOT NULL,
-  `cliente_categoria` char(2) NOT NULL,
+  `cliente_categoria` char(255) NOT NULL,
   `cliente_admicion` date NOT NULL,
   `cliente_monto` int(11) NOT NULL,
   `cliente_email` varchar(100) NOT NULL,
   `cliente_rol` varchar(100) NOT NULL,
-  `create_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`cliente_id`, `cliente_ci`, `cliente_nombre`, `cliente_apellidos`, `cliente_usuario`, `cliente_telefono`, `cliente_nacimiento`, `cliente_categoria`, `cliente_admicion`, `cliente_monto`, `cliente_email`, `cliente_rol`, `create_at`, `updated_at`) VALUES
+INSERT INTO `cliente` (`cliente_id`, `cliente_ci`, `cliente_nombre`, `cliente_apellidos`, `cliente_usuario`, `cliente_telefono`, `cliente_nacimiento`, `cliente_categoria`, `cliente_admicion`, `cliente_monto`, `cliente_email`, `cliente_rol`, `created_at`, `updated_at`) VALUES
 (1, 78784878, 'Juan Pablo', 'Marca Salinas', 'Juancho', 77545454, '1992-11-11', 'A', '2020-07-15', 400, 'juan@gmail.com', 'Socio', '2021-11-15 02:16:56', '2021-11-15 02:16:56'),
 (2, 78784875, 'Cristian', 'Romero Campos', 'Cris', 7878487, '1992-11-28', 'B', '2019-10-21', 4000, 'crias@gmail.com', 'Socio', '2021-11-15 02:19:14', '2021-11-15 02:19:14'),
 (3, 78784879, 'Marco', 'Salinas ', 'Marco', 49498959, '1995-05-25', 'C', '2016-05-25', 2000, 'marco@gmail.com', 'Socio', '2021-11-15 02:21:26', '2021-11-15 02:21:26'),
@@ -250,7 +250,7 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`venta_id`, `venta_tipo`, `venta_monto`, `venta_cantidad`, `venta_descuento`, `venta_total`, `created_at`, `updated_at`) VALUES
-(1, 'fgffg', 3, 3, 4, 55, '2021-11-15 01:27:16', '2021-11-15 01:27:16');
+(1, 'ratillo', 3, 3, 8, 55, '2021-11-15 01:27:16', '2021-11-15 02:24:33');
 
 -- --------------------------------------------------------
 
@@ -352,7 +352,7 @@ ALTER TABLE `chofer`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -364,13 +364,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `auto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

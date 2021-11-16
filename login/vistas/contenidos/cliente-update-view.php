@@ -49,84 +49,96 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
     ?>
 	<form  class="form-neon FormularioAjax"action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="update" autocomplete="off">
 		<input type="hidden" name="cliente_id_up" value="<?php echo $pagina[1]; ?>">
-		<fieldset>
-			<legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12 col-md-4">
-						<div class="form-group">
-							<label for="cliente_ci" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="cliente_ci_up" id="cliente_ci" maxlength="20" value="<?php echo $campos['cliente_ci']; ?>">
+						<fieldset>
+					<legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12 col-md-4">
+								<div class="form-group">
+									<label for="cliente_ci" class="bmd-label-floating">C.I.</label>
+									<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="cliente_ci_up" id="cliente_ci" maxlength="20" required="" value="<?php echo $campos['cliente_ci']; ?>">
+								</div>
+							</div>
+							
+							<div class="col-12 col-md-4">
+								<div class="form-group">
+									<label for="cliente_nombre" class="bmd-label-floating">Nombres</label>
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_nombre_up" id="cliente_nombre" maxlength="35" value="<?php echo $campos['cliente_nombre']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-4">
+								<div class="form-group">
+									<label for="cliente_apellidos" class="bmd-label-floating">Apellidos</label>
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellidos_up" id="cliente_apellidos" maxlength="35" value="<?php echo $campos['cliente_apellidos']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
+									<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="cliente_telefono_up" id="cliente_telefono" maxlength="20" value="<?php echo $campos['cliente_telefono']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_categoria" class="bmd-label-floating">Categoria Licencia Conducir</label>
+									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_up" id="cliente_categoria" maxlength="190" value="<?php echo $campos['cliente_categoria']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_nacimiento" class="bmd-label-floating">Fecha Nac.</label>
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_nacimiento_up" id="cliente_nacimiento" maxlength="20" value="<?php echo $campos['cliente_nacimiento']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_admicion" class="bmd-label-floating">Fecha de Afiliación</label>
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_admicion_up" id="cliente_admicion" maxlength="190" value="<?php echo $campos['cliente_admicion']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_monto" class="bmd-label-floating">Monto de Afiliación</label>
+									<input type="number" pattern="[0-9()+]{8,20}" class="form-control" name="cliente_monto_up" id="cliente_monto" maxlength="20" value="<?php echo $campos['cliente_monto']; ?>">
+								</div>
+							</div>
 						</div>
 					</div>
-					
-					<div class="col-12 col-md-4">
-						<div class="form-group">
-							<label for="cliente_nombre" class="bmd-label-floating">Nombres</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_nombre_up" id="cliente_nombre" maxlength="35" value="<?php echo $campos['cliente_nombre']; ?>">
+				</fieldset>
+				<br><br><br>
+				<fieldset>
+					<legend><i class="fas fa-user-lock"></i> &nbsp; Información de la cuenta</legend>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_usuario" class="bmd-label-floating">Nombre de cliente</label>
+									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="cliente_usuario_up" id="cliente_usuario" maxlength="35" value="<?php echo $campos['cliente_usuario']; ?>">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_email" class="bmd-label-floating">Email</label>
+									<input type="email" class="form-control" name="cliente_email_up" id="cliente_email" maxlength="70" value="<?php echo $campos['cliente_email']; ?>">
+								</div>
+							</div>
+					</div>
+				</fieldset>
+				<br><br><br>
+				<fieldset>
+					<legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								<div class="form-group">
+									<select class="form-control" name="cliente_rol_up">
+										<option value="Socio">Cliente</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="col-12 col-md-4">
-						<div class="form-group">
-							<label for="cliente_apellidos" class="bmd-label-floating">Apellidos</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellidos_up" id="cliente_apellidos" maxlength="35" value="<?php echo $campos['cliente_apellidos']; ?>">
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
-							<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="cliente_telefono_up" id="cliente_telefono" maxlength="20" value="<?php echo $campos['cliente_telefono']; ?>">
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_categoria" class="bmd-label-floating">Dirección</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_up" id="cliente_categoria" maxlength="190" value="<?php echo $campos['cliente_categoria']; ?>">
-						</div>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-		<br><br><br>
-		<fieldset>
-			<legend><i class="fas fa-user-lock"></i> &nbsp; Información de la cuenta</legend>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_usuario" class="bmd-label-floating">Nombre de cliente</label>
-							<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="cliente_usuario_up" id="cliente_usuario" maxlength="35" value="<?php echo $campos['cliente_usuario']; ?>">
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_email" class="bmd-label-floating">Email</label>
-							<input type="email" class="form-control" name="cliente_email_up" id="cliente_email" maxlength="70" value="<?php echo $campos['cliente_email']; ?>">
-						</div>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-		<br><br><br>
-		<fieldset>
-			<p class="text-center">Para poder guardar los cambios en esta cuenta debe de ingresar su nombre de cliente y contraseña</p>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_admin" class="bmd-label-floating">Nombre de cliente</label>
-							<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="cliente_admin" id="cliente_admin" maxlength="35" required="" >
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="clave_admin" class="bmd-label-floating">Contraseña</label>
-							<input type="password" class="form-control" name="clave_admin" id="clave_admin" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required="" >
-						</div>
-					</div>
-				</div>
-			</div>
-		</fieldset>
+				</fieldset>
 		<?php 
          if ($lc->encryption($_SESSION['id_spm'])!=$pagina[1]) {?>
          	<input type="hidden" name="tipo_cuenta" value="Impropia">

@@ -40,7 +40,7 @@ class clienteControlador extends clienteModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $cliente_ci)) {
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $cliente_ci)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -278,8 +278,9 @@ class clienteControlador extends clienteModelo
                         <th>C.I.</th>
                         <th>NOMBRE</th>
                         <th>TELÉFONO</th>
-                        <th>cliente</th>
+                        <th>CLIENTE</th>
                         <th>EMAIL</th>
+                        <th>VEHICULOS</th>
                         <th>ACTUALIZAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -296,6 +297,10 @@ class clienteControlador extends clienteModelo
                         <td>'.$rows['cliente_telefono'].'</td>
                         <td>'.$rows['cliente_usuario'].'</td>
                         <td>'.$rows['cliente_email'].'</td>
+                        <td><a class="dropdown-item" href="#" data-id="'.mainModel::encryption($rows['cliente_id']).'" data-toggle="modal" data-target="#vehiculoModal">
+                        <i class="fas fa-bus fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Mis Vehiculos
+                         </a></td>
                         <td>
                             <a href="'.SERVERURL.'cliente-update/'.mainModel::encryption($rows['cliente_id']).'/" class="btn btn-success">
                                     <i class="fas fa-sync-alt"></i> 
@@ -474,19 +479,8 @@ class clienteControlador extends clienteModelo
         $cliente_email = mainModel::limpiar_cadena($_POST['cliente_email_up']);
         $cliente_rol = mainModel::limpiar_cadena($_POST['cliente_rol_up']);
 
-                
-
-                if (isset($_POST['cliente_privilegio_up']))
-                {
-                $privilegio=mainModel::limpiar_cadena($_POST['cliente_privilegio_up']);
-                }
-                else {
-                    $privilegio=$campos['cliente_privilegio'];
-                } 
-
-
-                   /*== comprobar campos vacios ==*/
-                   if ($cliente_ci == "" || $cliente_nombre == "" || $cliente_apellidos == "" || $cliente_usuario == "" || $cliente_telefono == "" || $cliente_nacimiento == ""|| $cliente_categoria == ""|| $cliente_admicion == ""|| $cliente_monto == ""|| $cliente_email == ""|| $cliente_rol == "") {
+            /*== comprobar campos vacios ==*/
+            if ($cliente_ci == "" || $cliente_nombre == "" || $cliente_apellidos == "" || $cliente_usuario == "" || $cliente_telefono == "" || $cliente_nacimiento == ""|| $cliente_categoria == ""|| $cliente_admicion == ""|| $cliente_monto == ""|| $cliente_email == ""|| $cliente_rol == "") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -498,7 +492,7 @@ class clienteControlador extends clienteModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $cliente_ci)) {
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $cliente_ci)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -607,7 +601,7 @@ class clienteControlador extends clienteModelo
         if ($cliente_email != "") {
             if (filter_var($cliente_email, FILTER_VALIDATE_EMAIL)) {
 
-                $check_email = mainModel::ejecutar_consulta_simple("SELECT cliente_email FROM cliente WHERE cliente_email='$cliente_email'");
+                $check_email = mainModel::ejecutar_consulta_simple("SELECT cliente_email FROM cliente WHERE cliente_id!=$id  AND cliente_email='$cliente_email'");
                 if ($check_email->rowCount() > 0) {
                     $alerta = [
                         "Alerta" => "simple",
@@ -655,16 +649,6 @@ class clienteControlador extends clienteModelo
 
             }
 
-           if($check_cuenta->rowCount()<=0){
-             $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Nombre y Clave de administrador no validos",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-           }
             /*Preparandos datos para  enviarlos al modelo*/
 
             $datos_cliente_up=[
