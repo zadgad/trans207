@@ -278,8 +278,9 @@ class clienteControlador extends clienteModelo
                         <th>C.I.</th>
                         <th>NOMBRE</th>
                         <th>TELÉFONO</th>
-                        <th>cliente</th>
+                        <th>CLIENTE</th>
                         <th>EMAIL</th>
+                        <th>VEHICULOS</th>
                         <th>ACTUALIZAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -296,6 +297,10 @@ class clienteControlador extends clienteModelo
                         <td>'.$rows['cliente_telefono'].'</td>
                         <td>'.$rows['cliente_usuario'].'</td>
                         <td>'.$rows['cliente_email'].'</td>
+                        <td><a class="dropdown-item" href="#" data-id="'.mainModel::encryption($rows['cliente_id']).'" data-toggle="modal" data-target="#vehiculoModal">
+                        <i class="fas fa-bus fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Mis Vehiculos
+                         </a></td>
                         <td>
                             <a href="'.SERVERURL.'cliente-update/'.mainModel::encryption($rows['cliente_id']).'/" class="btn btn-success">
                                     <i class="fas fa-sync-alt"></i> 

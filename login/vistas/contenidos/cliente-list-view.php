@@ -34,3 +34,46 @@ $ins_cliente=new clienteControlador();
 echo $ins_cliente->paginador_cliente_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],"");
  ?>
 </div>
+<div class="modal fade" id="vehiculoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Vehiculos</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+					  <div class="row">
+							<div class="col-6">
+								<label for="">Asignar vehiculo</label>
+								<div class="form-group">
+									<select class="form-control" name="vehiculo_add">
+										<option value="1">Vehiculo</option>
+										<option value="2">Vehiculo2</option>
+										<option value="3">Vehiculo3</option>
+										<option value="4">Vehiculo4</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-6">
+								<label for="">Asignar Chofer</label>
+								<div class="form-group">
+									<select class="form-control" name="chofer_add">
+										<option value="1">Chofer 1</option>
+										<option value="2">Chofer 2</option>
+										<option value="3">Chofer 3</option>
+										<option value="4">Chofer 4</option>
+									</select>
+								</div>
+							</div>
+						</div>
+		</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary vehicleCli" type="button" data-dismiss="modal" >Salir</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
