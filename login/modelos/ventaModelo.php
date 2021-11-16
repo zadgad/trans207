@@ -16,7 +16,7 @@
                   $sql->bindParam(":venta_descuento",$datos['venta_descuento']);
                   $sql->bindParam(":venta_total",$datos['venta_total']);
                   $sql->execute();
-
+                  
                   return $sql;
 
             }
