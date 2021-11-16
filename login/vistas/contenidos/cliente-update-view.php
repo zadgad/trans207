@@ -68,8 +68,8 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="cliente_apellido" class="bmd-label-floating">Apellidos</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellido_up" id="cliente_apellido" maxlength="35" value="<?php echo $campos['cliente_apellido']; ?>">
+							<label for="cliente_apellidos" class="bmd-label-floating">Apellidos</label>
+							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellidos_up" id="cliente_apellidos" maxlength="35" value="<?php echo $campos['cliente_apellidos']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
@@ -80,8 +80,8 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_direccion_up" id="cliente_direccion" maxlength="190" value="<?php echo $campos['cliente_direccion']; ?>">
+							<label for="cliente_categoria" class="bmd-label-floating">Dirección</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_up" id="cliente_categoria" maxlength="190" value="<?php echo $campos['cliente_categoria']; ?>">
 						</div>
 					</div>
 				</div>
@@ -94,8 +94,8 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="cliente_cliente" class="bmd-label-floating">Nombre de cliente</label>
-							<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="cliente_cliente_up" id="cliente_cliente" maxlength="35" value="<?php echo $campos['cliente_cliente']; ?>">
+							<label for="cliente_usuario" class="bmd-label-floating">Nombre de cliente</label>
+							<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="cliente_usuario_up" id="cliente_usuario" maxlength="35" value="<?php echo $campos['cliente_usuario']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
@@ -104,106 +104,9 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 							<input type="email" class="form-control" name="cliente_email_up" id="cliente_email" maxlength="70" value="<?php echo $campos['cliente_email']; ?>">
 						</div>
 					</div>
-                    <?php if ($_SESSION['privilegio_spm']==1 && $campos['cliente_id']!=1) {
-                    	
-                    ?>
-
-					<div class="col-12">
-						<div class="form-group">
-							<span>Estado de la cuenta &nbsp; <?php if ($campos['cliente_estado']=="Activa")
-							{
-								echo '<span class="badge badge-info">Activa</span>';
-								
-							}else{
-								echo '<span class="badge badge-danger">Deshabilitada</span>';
-
-							} ?> </span>
-							<select class="form-control" name="cliente_estado_up">
-								<option value="Activa" <?php  if ($campos['cliente_estado']=="Activa") {
-									echo 'selected=""';
-								}?> >Activa</option>
-								<option value="Deshabilitada" <?php  if ($campos['cliente_estado']=="Deshabilitada") {
-									echo 'selected=""';
-								}?>>Deshabilitada</option>
-							</select>
-						</div>
-					</div>
-
-                  <?php 
-                  } 
-                   ?>
 				</div>
 			</div>
 		</fieldset>
-		<br><br><br>
-		<fieldset>
-			<legend style="margin-top: 40px;"><i class="fas fa-lock"></i> &nbsp; Nueva contraseña</legend>
-			<p>Para actualizar la contraseña de esta cuenta ingrese una nueva y vuelva a escribirla. En caso que no desee actualizarla debe dejar vacíos los dos campos de las contraseñas.</p>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_clave_nueva_1" class="bmd-label-floating">Contraseña</label>
-							<input type="password" class="form-control" name="cliente_clave_nueva_1" id="cliente_clave_nueva_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="cliente_clave_nueva_2" class="bmd-label-floating">Repetir contraseña</label>
-							<input type="password" class="form-control" name="cliente_clave_nueva_2" id="cliente_clave_nueva_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
-						</div>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-		<?php if ($_SESSION['privilegio_spm']==1 && $campos['cliente_id']!=1) {
-                    	
-          ?>
-
-		<br><br><br>
-		<fieldset>
-			<legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<p><span class="badge badge-info">Control total</span> Permisos para registrar, actualizar y eliminar</p>
-						<p><span class="badge badge-success">Edición</span> Permisos para registrar y actualizar</p>
-						<p><span class="badge badge-dark">Registrar</span> Solo permisos para registrar</p>
-						<div class="form-group">
-							<select class="form-control" name="cliente_privilegio_up">
-								
-								<option value="1" <?php if ($campos['cliente_privilegio']==1) {
-									echo 'selected=""';
-									
-								} ?> >Control total <?php if ($campos['cliente_privilegio']==1) {
-									echo '(Actual)';
-									
-								} ?></option>
-
-								<option value="2" <?php if ($campos['cliente_privilegio']==2) {
-									echo 'selected=""';
-									
-								} ?>>Edición <?php if ($campos['cliente_privilegio']==2) {
-									echo '(Actual)';
-									
-								} ?></option>
-								
-
-								<option value="3" <?php if ($campos['cliente_privilegio']==3) {
-									echo 'selected=""';
-									
-								} ?>>Registrar <?php if ($campos['cliente_privilegio']==3) {
-									echo '(Actual)';
-									
-								} ?></option>
-								
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-	    <?php } ?>
 		<br><br><br>
 		<fieldset>
 			<p class="text-center">Para poder guardar los cambios en esta cuenta debe de ingresar su nombre de cliente y contraseña</p>
