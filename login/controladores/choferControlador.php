@@ -9,25 +9,25 @@ if ($peticionAjax) {
 
 class choferControlador extends choferModelo
 {
-
-    /*--------- Controlador agregar chofer ---------*/
+        /*--------- Controlador agregar chofer ---------*/
     public function agregar_chofer_controlador()
     {
-        $dni       = mainModel::limpiar_cadena($_POST['chofer_dni_reg']);
-        $nombre    = mainModel::limpiar_cadena($_POST['chofer_nombre_reg']);
-        $apellido  = mainModel::limpiar_cadena($_POST['chofer_apellido_reg']);
-        $telefono  = mainModel::limpiar_cadena($_POST['chofer_telefono_reg']);
-        $direccion = mainModel::limpiar_cadena($_POST['chofer_direccion_reg']);
+        $chofer_ci       = mainModel::limpiar_cadena($_POST['chofer_ci_reg']);
+        $chofer_nombre    = mainModel::limpiar_cadena($_POST['chofer_nombre_reg']);
+        $chofer_apellidos  = mainModel::limpiar_cadena($_POST['chofer_apellidos_reg']);
+        $chofer_usuario  = mainModel::limpiar_cadena($_POST['chofer_usuario_reg']);
+        $chofer_telefono = mainModel::limpiar_cadena($_POST['chofer_telefono_reg']);
 
-        $chofer = mainModel::limpiar_cadena($_POST['chofer_chofer_reg']);
-        $email   = mainModel::limpiar_cadena($_POST['chofer_email_reg']);
-        $clave1  = mainModel::limpiar_cadena($_POST['chofer_clave_1_reg']);
-        $clave2  = mainModel::limpiar_cadena($_POST['chofer_clave_2_reg']);
+        $chofer_nacimiento = mainModel::limpiar_cadena($_POST['chofer_nacimiento_reg']);
+        $chofer_categoria   = mainModel::limpiar_cadena($_POST['chofer_categoria_reg']);
+        $chofer_admincion  = mainModel::limpiar_cadena($_POST['chofer_admincion_reg']);
+        $chofer_monto  = mainModel::limpiar_cadena($_POST['chofer_monto_reg']);
 
-        $privilegio = mainModel::limpiar_cadena($_POST['chofer_privilegio_reg']);
+        $chofer_email = mainModel::limpiar_cadena($_POST['chofer_email_reg']);
+        $chofer_rol = mainModel::limpiar_cadena($_POST['chofer_rol_reg']);
 
         /*== comprobar campos vacios ==*/
-        if ($dni == "" || $nombre == "" || $apellido == "" || $chofer == "" || $clave1 == "" || $clave2 == "") {
+        if ($chofer_ci == "" || $chofer_nombre == "" || $chofer_apellidos == "" || $chofer_usuario == "" || $chofer_telefono == "" || $chofer_nacimiento == ""|| $chofer_categoria == ""|| $chofer_admincion == ""|| $chofer_monto == ""|| $chofer_email == ""|| $chofer_rol == "") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -39,18 +39,18 @@ class choferControlador extends choferModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $dni)) {
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $chofer_ci)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El DNI no coincide con el formato solicitado",
+                "Texto"  => "El chofer_ci no coincide con el formato solicitado",
                 "Tipo"   => "error"
             ];
             echo json_encode($alerta);
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_nombre)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -61,7 +61,17 @@ class choferControlador extends choferModelo
             exit();
         }
 
-        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_apellidos)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El APELLIDO no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_usuario)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -72,8 +82,8 @@ class choferControlador extends choferModelo
             exit();
         }
 
-        if ($telefono != "") {
-            if (mainModel::verificar_datos("[0-9()+]{8,20}", $telefono)) {
+        if ($chofer_telefono != "") {
+            if (mainModel::verificar_datos("[0-9()+]{8,20}", $chofer_telefono)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
@@ -85,74 +95,60 @@ class choferControlador extends choferModelo
             }
         }
 
-        if ($direccion != "") {
-            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
+        if ($chofer_categoria != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_categoria)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "La DIRECCION no coincide con el formato solicitado",
+                    "Texto"  => "La lic. categ no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
         }
-
-        if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $chofer)) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El NOMBRE DE chofer no coincide con el formato solicitado",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
+        if ($chofer_nacimiento != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_nacimiento)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "La fecha nac. no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
         }
-
-        if (mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave1) || mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave2)) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "Las CLAVES no coinciden con el formato solicitado",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-
+        if ($chofer_admincion != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_admincion)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "La admision no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
         }
-
-        /*== Comprobando DNI ===*/
-        $check_dni = mainModel::ejecutar_consulta_simple("SELECT chofer_dni FROM chofer WHERE chofer_dni='$dni'");
-        if ($check_dni->rowCount() > 0) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El DNI ingresado ya se encuentra registrado en el sistema",
-                "Tipo"   => "error"
-            ];
-
-            echo json_encode($alerta);
-            exit();
-
-        }
-        /*== Comprobando chofer ===*/
-        $check_user = mainModel::ejecutar_consulta_simple("SELECT chofer_chofer FROM chofer WHERE chofer_chofer='$chofer'");
-        if ($check_user->rowCount() > 0) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El Nombre de chofer ingresado ya se encuentra registrado en el sistema",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
+        if ($chofer_monto != "") {
+            if (mainModel::verificar_datos("[0-9()+]{1,50}", $chofer_monto)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "El monto no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
         }
         /*== Comprobando email ===*/
 
-        if ($email != "") {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($chofer_email != "") {
+            if (filter_var($chofer_email, FILTER_VALIDATE_EMAIL)) {
 
-                $check_email = mainModel::ejecutar_consulta_simple("SELECT chofer_email FROM chofer WHERE chofer_email='$email'");
+                $check_email = mainModel::ejecutar_consulta_simple("SELECT chofer_email FROM chofer WHERE chofer_email='$chofer_email'");
                 if ($check_email->rowCount() > 0) {
                     $alerta = [
                         "Alerta" => "simple",
@@ -174,42 +170,48 @@ class choferControlador extends choferModelo
                 exit();
             }
         }
+        if ($chofer_rol != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_rol)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "La fecha nac. no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
+        }
 
-        if ($clave1 != $clave2) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "Las claves que acaba de ingresar no coinciden",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        } else {
-            $clave = mainModel::encryption($clave1);
-        }
-        /*coprobando privilegio*/
-        if ($privilegio < 1 || $privilegio > 3) {
-            $alerta = [
-                "Alerta" => "simple",
-                "Titulo" => "Ocurrió un error inesperado",
-                "Texto"  => "El privilegio seleccionado no es valido",
-                "Tipo"   => "error"
-            ];
-            echo json_encode($alerta);
-            exit();
-        }
+       /*comprobando privilegios*/
+
+         session_start(['name'=>'SPM']);
+
+         if ($_SESSION['privilegio_spm']!=1) {
+             $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "No tienes los permisos necesario para realizar esta operacion",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                 exit();
+
+         }
+       
 
         $datos_chofer_reg = [
-            "DNI"        => $dni,
-            "Nombre"     => $nombre,
-            "Apellido"   => $apellido,
-            "Telefono"   => $telefono,
-            "Direccion"  => $direccion,
-            "Email"      => $email,
-            "chofer"    => $chofer,
-            "Clave"      => $clave,
-            "Estado"     => "Activa",
-            "Privilegio" => $privilegio
+            "chofer_ci"        => $chofer_ci,
+            "chofer_nombre"     => $chofer_nombre,
+            "chofer_apellidos"   => $chofer_apellidos,
+            "chofer_usuario"   => $chofer_usuario,
+            "chofer_telefono"  => $chofer_telefono,
+            "chofer_nacimiento"      => $chofer_nacimiento,
+            "chofer_categoria"    => $chofer_categoria,
+            "chofer_admincion"      => $chofer_admincion,
+            "chofer_monto"     => $chofer_monto,
+            "chofer_email" => $chofer_email,
+            "chofer_rol" => $chofer_rol
         ];
         $agregar_chofer = choferModelo::agregar_chofer_modelo($datos_chofer_reg);
         if ($agregar_chofer->rowCount() == 1) {
@@ -250,11 +252,11 @@ class choferControlador extends choferModelo
       $inicio= ($pagina>0) ? (($pagina*$registros)-$registros) : 0;
 
       if (isset($busqueda) && $busqueda!="") {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer WHERE ((chofer_id!='$id' AND chofer_id!='1') AND (chofer_dni LIKE '%$busqueda%' OR chofer_nombre LIKE '%$busqueda%' OR chofer_apellido LIKE '%$busqueda%' OR chofer_telefono LIKE '%$busqueda%' OR chofer_email LIKE '%$busqueda%'  OR chofer_chofer LIKE '%$busqueda%')) ORDER BY chofer_nombre ASC LIMIT $inicio,$registros";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer WHERE ((chofer_ci LIKE '%$busqueda%' OR chofer_nombre LIKE '%$busqueda%' OR chofer_apellidos LIKE '%$busqueda%' OR chofer_telefono LIKE '%$busqueda%' OR chofer_email LIKE '%$busqueda%'  OR chofer_usuario LIKE '%$busqueda%')) ORDER BY chofer_nombre ASC LIMIT $inicio,$registros";
           
       }
       else{
-       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer WHERE chofer_id!='$id' AND chofer_id!='1' ORDER BY chofer_nombre ASC LIMIT $inicio,$registros";
+       $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer  ORDER BY chofer_nombre ASC LIMIT $inicio,$registros";
       }
 
 
@@ -272,11 +274,12 @@ class choferControlador extends choferModelo
                 <thead>
                     <tr class="text-center roboto-medium">
                         <th>#</th>
-                        <th>DNI</th>
+                        <th>C.I.</th>
                         <th>NOMBRE</th>
                         <th>TELÉFONO</th>
                         <th>chofer</th>
                         <th>EMAIL</th>
+                        <th>VEHICULOS</th>
                         <th>ACTUALIZAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -288,13 +291,17 @@ class choferControlador extends choferModelo
                  foreach ($datos as $rows){
                    $tabla.='<tr class="text-center" >
                         <td>'.$contador.'</td>
-                        <td>'.$rows['chofer_dni'].'</td>
-                        <td>'.$rows['chofer_nombre'].' '.$rows['chofer_apellido'].'</td>
+                        <td>'.$rows['chofer_ci'].'</td>
+                        <td>'.$rows['chofer_nombre'].' '.$rows['chofer_apellidos'].'</td>
                         <td>'.$rows['chofer_telefono'].'</td>
-                        <td>'.$rows['chofer_chofer'].'</td>
+                        <td>'.$rows['chofer_usuario'].'</td>
                         <td>'.$rows['chofer_email'].'</td>
+                        <td><a class="dropdown-item" href="#" data-id="'.mainModel::encryption($rows['chofer_id']).'" data-toggle="modal" data-target="#vehiculoModal">
+                        <i class="fas fa-bus fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Mis Vehiculos
+                         </a></td>
                         <td>
-                            <a href="'.SERVERURL.'user-update/'.mainModel::encryption($rows['chofer_id']).'/" class="btn btn-success">
+                            <a href="'.SERVERURL.'chofer-update/'.mainModel::encryption($rows['chofer_id']).'/" class="btn btn-success">
                                     <i class="fas fa-sync-alt"></i> 
                             </a>
                         </td>
@@ -441,8 +448,8 @@ class choferControlador extends choferModelo
 
             //Comprobar el chofer en la BD
 
-            $check_user=mainModel::ejecutar_consulta_simple("SELECT * FROM chofer WHERE chofer_id='$id'");
-                if ( $check_user->rowCount()<=0) {
+            $check_chofer=mainModel::ejecutar_consulta_simple("SELECT * FROM chofer WHERE chofer_id='$id'");
+                if ( $check_chofer->rowCount()<=0) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
@@ -452,268 +459,182 @@ class choferControlador extends choferModelo
                     echo json_encode($alerta);
                      exit();
                 }else{
-                     $campos=$check_user->fetch();
+                     $campos=$check_chofer->fetch();
                      
                 }
 
                 /**/
-                $dni=mainModel::limpiar_cadena($_POST['chofer_dni_up']);
-                $nombre=mainModel::limpiar_cadena($_POST['chofer_nombre_up']);
-                $apellido=mainModel::limpiar_cadena($_POST['chofer_apellido_up']);
-                $telefono=mainModel::limpiar_cadena($_POST['chofer_telefono_up']);
-                $direccion=mainModel::limpiar_cadena($_POST['chofer_direccion_up']);
-                $chofer=mainModel::limpiar_cadena($_POST['chofer_chofer_up']);
-                $email=mainModel::limpiar_cadena($_POST['chofer_email_up']);
-                
-                if (isset($_POST['chofer_estado_up']))
-                {
-                $estado=mainModel::limpiar_cadena($_POST['chofer_estado_up']);
-                }
-                else {
-                    $estado=$campos['chofer_estado'];
-                } 
+                $chofer_ci       = mainModel::limpiar_cadena($_POST['chofer_ci_up']);
+        $chofer_nombre    = mainModel::limpiar_cadena($_POST['chofer_nombre_up']);
+        $chofer_apellidos  = mainModel::limpiar_cadena($_POST['chofer_apellidos_up']);
+        $chofer_usuario  = mainModel::limpiar_cadena($_POST['chofer_usuario_up']);
+        $chofer_telefono = mainModel::limpiar_cadena($_POST['chofer_telefono_up']);
 
-                if (isset($_POST['chofer_privilegio_up']))
-                {
-                $privilegio=mainModel::limpiar_cadena($_POST['chofer_privilegio_up']);
-                }
-                else {
-                    $privilegio=$campos['chofer_privilegio'];
-                } 
+        $chofer_nacimiento = mainModel::limpiar_cadena($_POST['chofer_nacimiento_up']);
+        $chofer_categoria   = mainModel::limpiar_cadena($_POST['chofer_categoria_up']);
+        $chofer_admincion  = mainModel::limpiar_cadena($_POST['chofer_admincion_up']);
+        $chofer_monto  = mainModel::limpiar_cadena($_POST['chofer_monto_up']);
 
-                 
-                 $admin_chofer=mainModel::limpiar_cadena($_POST['chofer_admin']); 
-                 $admin_clave=mainModel::limpiar_cadena($_POST['clave_admin']); 
-                 $tipo_cuenta=mainModel::limpiar_cadena($_POST['tipo_cuenta']);
+        $chofer_email = mainModel::limpiar_cadena($_POST['chofer_email_up']);
+        $chofer_rol = mainModel::limpiar_cadena($_POST['chofer_rol_up']);
 
-                   /*== comprobar campos vacios ==*/
-                    if ($dni == "" || $nombre == "" || $apellido == "" || $chofer == "" || $admin_chofer == "" || $admin_clave == "") {
-                        $alerta = [
-                            "Alerta" => "simple",
-                            "Titulo" => "Ocurrió un error inesperado",
-                            "Texto"  => "No has llenado todos los campos que son obligatorios",
-                            "Tipo"   => "error"
-                        ];
-                        echo json_encode($alerta);
-                        exit();
-                    }
+            /*== comprobar campos vacios ==*/
+            if ($chofer_ci == "" || $chofer_nombre == "" || $chofer_apellidos == "" || $chofer_usuario == "" || $chofer_telefono == "" || $chofer_nacimiento == ""|| $chofer_categoria == ""|| $chofer_admincion == ""|| $chofer_monto == ""|| $chofer_email == ""|| $chofer_rol == "") {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "No has llenado todos los campos que son obligatorios",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
 
-              /*== Verificando integridad de los datos ==*/
-            if (mainModel::verificar_datos("[0-9-]{10,20}", $dni)) {
+        /*== Verificando integridad de los datos ==*/
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $chofer_ci)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El chofer_ci no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_nombre)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El NOMBRE no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_apellidos)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El APELLIDO no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+        if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $chofer_usuario)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El APELLIDO no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
+
+        if ($chofer_telefono != "") {
+            if (mainModel::verificar_datos("[0-9()+]{8,20}", $chofer_telefono)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El DNI no coincide con el formato solicitado",
+                    "Texto"  => "El TELEFONO no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
+        }
 
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
+        if ($chofer_categoria != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_categoria)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El NOMBRE no coincide con el formato solicitado",
+                    "Texto"  => "La lic. categ no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
-
-            if (mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
+        }
+        if ($chofer_nacimiento != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_nacimiento)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El APELLIDO no coincide con el formato solicitado",
+                    "Texto"  => "La fecha nac. no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
+        }
+        if ($chofer_admincion != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_admincion)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "La admision no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
+        }
+        if ($chofer_monto != "") {
+            if (mainModel::verificar_datos("[0-9()+]{1,50}", $chofer_monto)) {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto"  => "El monto no coincide con el formato solicitado",
+                    "Tipo"   => "error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
+        }
+        /*== Comprobando email ===*/
 
-            if ($telefono != "") {
-                if (mainModel::verificar_datos("[0-9()+]{8,20}", $telefono)) {
+        if ($chofer_email != "") {
+            if (filter_var($chofer_email, FILTER_VALIDATE_EMAIL)) {
+
+                $check_email = mainModel::ejecutar_consulta_simple("SELECT chofer_email FROM chofer WHERE chofer_id!=$id  AND chofer_email='$chofer_email'");
+                if ($check_email->rowCount() > 0) {
                     $alerta = [
                         "Alerta" => "simple",
                         "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El TELEFONO no coincide con el formato solicitado",
+                        "Texto"  => "El email ingresado ya se encuentra registrado en el sistema",
                         "Tipo"   => "error"
                     ];
                     echo json_encode($alerta);
                     exit();
                 }
-            }
-
-            if ($direccion != "") {
-                if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "La DIRECCION no coincide con el formato solicitado",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-                }
-            }
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $chofer)) {
+            } else {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El NOMBRE DE chofer no coincide con el formato solicitado",
+                    "Texto"  => "Ha ingresado un correo no valido",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
-
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9]{1,35}", $admin_chofer)) {
+        }
+        if ($chofer_rol != "") {
+            if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $chofer_rol)) {
                 $alerta = [
                     "Alerta" => "simple",
                     "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El NOMBRE DE chofer no coincide con el formato solicitado",
+                    "Texto"  => "La fecha nac. no coincide con el formato solicitado",
                     "Tipo"   => "error"
                 ];
                 echo json_encode($alerta);
                 exit();
             }
-             
-
-            if (mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $admin_clave)) {
-                $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "Tu CLAVE no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-            }
-
-             $admin_clave=mainModel::encryption($admin_clave);
-             if ($privilegio <1 || $privilegio>3) {
-                 $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El privilegio no corresponde a un valor valido",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-             }
-
-             if ($estado!= "Activa" && $estado!= "Deshabilitado") {
-                 $alerta = [
-                    "Alerta" => "simple",
-                    "Titulo" => "Ocurrió un error inesperado",
-                    "Texto"  => "El estado de la cuenta no coincide con el formato solicitado",
-                    "Tipo"   => "error"
-                ];
-                echo json_encode($alerta);
-                exit();
-             }
-                      /*== Comprobando DNI ===*/
-                if ($dni!=$campos['chofer_dni']) {
-                    
-                
-                $check_dni = mainModel::ejecutar_consulta_simple("SELECT chofer_dni FROM chofer WHERE chofer_dni='$dni'");
-                if ($check_dni->rowCount() > 0) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El DNI ingresado ya se encuentra registrado en el sistema",
-                        "Tipo"   => "error"
-                    ];
-
-                    echo json_encode($alerta);
-                    exit();
-                 }
-                }
-                /*== Comprobando chofer ===*/
-                if($chofer!=$campos['chofer_chofer']){
-
-                $check_user = mainModel::ejecutar_consulta_simple("SELECT chofer_chofer FROM chofer WHERE chofer_chofer='$chofer'");
-                if ($check_user->rowCount() > 0) {
-                    $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "El Nombre de chofer ingresado ya se encuentra registrado en el sistema",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                 }
-                }
-                /*== Comprobando Email ===*/
-                if ($email!=$campos['chofer_email'] && $email!=""){
-                    if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-                        $check_email = mainModel::ejecutar_consulta_simple("SELECT chofer_email FROM chofer WHERE chofer_email='$email'");
-                        if ($check_email->rowCount()>0) {
-                        $alerta = [
-                            "Alerta" => "simple",
-                            "Titulo" => "Ocurrió un error inesperado",
-                            "Texto"  => "El nuevo email ingresado ya se encuentra registrado en el sistema",
-                            "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                    }
-                    }else{
-                        $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Ha ingresado un correo no valido",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-                    }
-                    
-                }
-
-           /*--Comprobando claves*/
-           if ($_POST['chofer_clave_nueva_1']!= "" || $_POST['chofer_clave_nueva_2']!= "") {
-               if($_POST['chofer_clave_nueva_1']!=$_POST['chofer_clave_nueva_2']){
-                $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Las nuevas claves ingresadas no coinciden",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-               }
-               else{
-               if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$_POST['chofer_clave_nueva_1']) || mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$_POST['chofer_clave_nueva_2'])){
-                $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Las nuevas claves no coinciden  con el formato solicitado",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-
-               }
-               $clave=mainModel::encryption($_POST['chofer_clave_nueva_1']);
-               }
-           }
-           else{
-            $clave=$campos['chofer_clave'];
-
-           }
+        }
           /*COMPROBANDO LAS CREDIDENCIALES PARA ACTUALIZACION DATOS*/
-           if($tipo_cuenta=="Propia")
-           {
-               $check_cuenta = mainModel::ejecutar_consulta_simple("SELECT chofer_id FROM chofer WHERE chofer_chofer='$admin_chofer' AND chofer_clave='$admin_clave' AND chofer_id='$id'");
-           }else
-           {
             session_start(['name'=>'SPM']);
             if($_SESSION['privilegio_spm']!=1){
                 $alerta = [
@@ -726,32 +647,22 @@ class choferControlador extends choferModelo
                     exit();
 
             }
-            $check_cuenta =mainModel::ejecutar_consulta_simple("SELECT chofer_id FROM chofer WHERE chofer_chofer='$admin_chofer' AND chofer_clave='$admin_clave'");
-           }
 
-           if($check_cuenta->rowCount()<=0){
-             $alerta = [
-                        "Alerta" => "simple",
-                        "Titulo" => "Ocurrió un error inesperado",
-                        "Texto"  => "Nombre y Clave de administrador no validos",
-                        "Tipo"   => "error"
-                    ];
-                    echo json_encode($alerta);
-                    exit();
-           }
             /*Preparandos datos para  enviarlos al modelo*/
 
-            $datos_chofer_up=["DNI"=>$dni,
-                               "Nombre"=>$nombre,
-                               "Apellido"=>$apellido,
-                               "Telefono"=>$telefono,
-                               "Direccion"=>$direccion,
-                               "Email"=>$email,
-                               "chofer"=>$chofer,
-                               "Clave"=>$clave,
-                               "Estado"=>$estado,
-                               "Privilegio"=>$privilegio,
-                               "ID"=>$id
+            $datos_chofer_up=[
+                            "chofer_ci"        => $chofer_ci,
+                            "chofer_nombre"     => $chofer_nombre,
+                            "chofer_apellidos"   => $chofer_apellidos,
+                            "chofer_usuario"   => $chofer_usuario,
+                            "chofer_telefono"  => $chofer_telefono,
+                            "chofer_nacimiento"      => $chofer_nacimiento,
+                            "chofer_categoria"    => $chofer_categoria,
+                            "chofer_admincion"      => $chofer_admincion,
+                            "chofer_monto"     => $chofer_monto,
+                            "chofer_email" => $chofer_email,
+                            "chofer_rol" => $chofer_rol,
+                            "chofer_id"=>$id
                                ];
                 if(choferModelo::actualizar_chofer_modelo($datos_chofer_up)){
                   $alerta = [
@@ -769,7 +680,7 @@ class choferControlador extends choferModelo
                     ];
                     }
                     echo json_encode($alerta);
+                }
 
-
-      }/*fin de controlador*/ 
+         /*fin de controlador*/ 
 }
