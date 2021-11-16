@@ -57,170 +57,87 @@ $datos_chofer=$ins_chofer->datos_chofer_controlador("Unico",$pagina[1]);
 						<div class="row">
 							<div class="col-12 col-md-4">
 								<div class="form-group">
-									<label for="chofer_dni" class="bmd-label-floating">DNI</label>
-									<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="chofer_dni_up" id="chofer_dni" maxlength="20" value="<?php echo $campos['chofer_dni']; ?>">
+									<label for="chofer_ci" class="bmd-label-floating">C.I.</label>
+									<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="chofer_ci_up" id="chofer_ci" maxlength="20" required="">
 								</div>
 							</div>
 							
 							<div class="col-12 col-md-4">
 								<div class="form-group">
 									<label for="chofer_nombre" class="bmd-label-floating">Nombres</label>
-									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_nombre_up" id="chofer_nombre" maxlength="35" value="<?php echo $campos['chofer_nombre']; ?>">
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_nombre_up" id="chofer_nombre" maxlength="35" >
 								</div>
 							</div>
 							<div class="col-12 col-md-4">
 								<div class="form-group">
-									<label for="chofer_apellido" class="bmd-label-floating">Apellidos</label>
-									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_apellido_up" id="chofer_apellido" maxlength="35" value="<?php echo $campos['chofer_apellido']; ?>">
+									<label for="chofer_apellidos" class="bmd-label-floating">Apellidos</label>
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_apellidos_up" id="chofer_apellidos" maxlength="35">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_telefono" class="bmd-label-floating">Teléfono</label>
-									<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_telefono_up" id="chofer_telefono" maxlength="20" value="<?php echo $campos['chofer_telefono']; ?>">
+									<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_telefono_up" id="chofer_telefono" maxlength="20">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="chofer_direccion" class="bmd-label-floating">Dirección</label>
-									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_direccion_up" id="chofer_direccion" maxlength="190" value="<?php echo $campos['chofer_direccion']; ?>">
+									<label for="chofer_categoria" class="bmd-label-floating">Categoria Licencia Conducir</label>
+									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_up" id="chofer_categoria" maxlength="190">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="chofer_nacimiento" class="bmd-label-floating">Fecha Nac.</label>
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_nacimiento_up" id="chofer_nacimiento" maxlength="20">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="chofer_admincion" class="bmd-label-floating">Fecha de Afiliación</label>
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_admincion_up" id="chofer_admincion" maxlength="190" value="">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="chofer_monto" class="bmd-label-floating">Monto de Afiliación</label>
+									<input type="number" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_monto_up" id="chofer_monto" maxlength="20">
 								</div>
 							</div>
 						</div>
 					</div>
 				</fieldset>
-				<br><br><br>
-				<fieldset>
+
+					<fieldset>
 					<legend><i class="fas fa-user-lock"></i> &nbsp; Información de la cuenta</legend>
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="chofer_chofer" class="bmd-label-floating">Nombre de chofer</label>
-									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="chofer_chofer_up" id="chofer_chofer" maxlength="35" value="<?php echo $campos['chofer_chofer']; ?>">
+									<label for="chofer_usuario" class="bmd-label-floating">Nombre de Chofer</label>
+									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="chofer_usuario_up" id="chofer_usuario" maxlength="35">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_email" class="bmd-label-floating">Email</label>
-									<input type="email" class="form-control" name="chofer_email_up" id="chofer_email" maxlength="70" value="<?php echo $campos['chofer_email']; ?>">
+									<input type="email" class="form-control" name="chofer_email_up" id="chofer_email" maxlength="70">
 								</div>
 							</div>
-							<?php if ($_SESSION['privilegio_spm']==1 && $campos['chofer_id']!=1) {
-								
-							?>
-
-							<div class="col-12">
-								<div class="form-group">
-									<span>Estado de la cuenta &nbsp; <?php if ($campos['chofer_estado']=="Activa")
-									{
-										echo '<span class="badge badge-info">Activa</span>';
-										
-									}else{
-										echo '<span class="badge badge-danger">Deshabilitada</span>';
-
-									} ?> </span>
-									<select class="form-control" name="chofer_estado_up">
-										<option value="Activa" <?php  if ($campos['chofer_estado']=="Activa") {
-											echo 'selected=""';
-										}?> >Activa</option>
-										<option value="Deshabilitada" <?php  if ($campos['chofer_estado']=="Deshabilitada") {
-											echo 'selected=""';
-										}?>>Deshabilitada</option>
-									</select>
-								</div>
-							</div>
-
-						<?php 
-						} 
-						?>
-						</div>
 					</div>
 				</fieldset>
-				<br><br><br>
-				<fieldset>
-					<legend style="margin-top: 40px;"><i class="fas fa-lock"></i> &nbsp; Nueva contraseña</legend>
-					<p>Para actualizar la contraseña de esta cuenta ingrese una nueva y vuelva a escribirla. En caso que no desee actualizarla debe dejar vacíos los dos campos de las contraseñas.</p>
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-12 col-md-6">
-								<div class="form-group">
-									<label for="chofer_clave_nueva_1" class="bmd-label-floating">Contraseña</label>
-									<input type="password" class="form-control" name="chofer_clave_nueva_1" id="chofer_clave_nueva_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
-								</div>
-							</div>
-							<div class="col-12 col-md-6">
-								<div class="form-group">
-									<label for="chofer_clave_nueva_2" class="bmd-label-floating">Repetir contraseña</label>
-									<input type="password" class="form-control" name="chofer_clave_nueva_2" id="chofer_clave_nueva_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
-								</div>
-							</div>
-						</div>
-					</div>
-				</fieldset>
-				<?php if ($_SESSION['privilegio_spm']==1 && $campos['chofer_id']!=1) {
-								
-				?>
-
-				<br><br><br>
-				<fieldset>
+		<br><br><br>
+		<fieldset>
+		
+		</fieldset><fieldset>
 					<legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-								<p><span class="badge badge-info">Control total</span> Permisos para registrar, actualizar y eliminar</p>
-								<p><span class="badge badge-success">Edición</span> Permisos para registrar y actualizar</p>
-								<p><span class="badge badge-dark">Registrar</span> Solo permisos para registrar</p>
 								<div class="form-group">
-									<select class="form-control" name="chofer_privilegio_up">
-										
-										<option value="1" <?php if ($campos['chofer_privilegio']==1) {
-											echo 'selected=""';
-											
-										} ?> >Control total <?php if ($campos['chofer_privilegio']==1) {
-											echo '(Actual)';
-											
-										} ?></option>
-
-										<option value="2" <?php if ($campos['chofer_privilegio']==2) {
-											echo 'selected=""';
-											
-										} ?>>Edición <?php if ($campos['chofer_privilegio']==2) {
-											echo '(Actual)';
-											
-										} ?></option>
-										
-
-										<option value="3" <?php if ($campos['chofer_privilegio']==3) {
-											echo 'selected=""';
-											
-										} ?>>Registrar <?php if ($campos['chofer_privilegio']==3) {
-											echo '(Actual)';
-											
-										} ?></option>
-										
+									<select class="form-control" name="chofer_rol_up">
+										<option value="Socio">Chofer</option>
 									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</fieldset>
-				<?php } ?>
-				<br><br><br>
-				<fieldset>
-					<p class="text-center">Para poder guardar los cambios en esta cuenta debe de ingresar su nombre de chofer y contraseña</p>
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-12 col-md-6">
-								<div class="form-group">
-									<label for="chofer_admin" class="bmd-label-floating">Nombre de chofer</label>
-									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="chofer_admin" id="chofer_admin" maxlength="35" required="" >
-								</div>
-							</div>
-							<div class="col-12 col-md-6">
-								<div class="form-group">
-									<label for="clave_admin" class="bmd-label-floating">Contraseña</label>
-									<input type="password" class="form-control" name="clave_admin" id="clave_admin" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required="" >
 								</div>
 							</div>
 						</div>
