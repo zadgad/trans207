@@ -62,8 +62,8 @@ if ($_SESSION['privilegio_spm']!=1) {
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_direccion_reg" id="cliente_direccion" maxlength="190">
+									<label for="cliente_categoria" class="bmd-label-floating">Dirección</label>
+									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_reg" id="cliente_categoria" maxlength="190">
 								</div>
 							</div>
 						</div>

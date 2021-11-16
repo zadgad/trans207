@@ -68,8 +68,8 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="cliente_apellido" class="bmd-label-floating">Apellidos</label>
-							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellido_up" id="cliente_apellido" maxlength="35" value="<?php echo $campos['cliente_apellido']; ?>">
+							<label for="cliente_apellidos" class="bmd-label-floating">Apellidos</label>
+							<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellidos_up" id="cliente_apellidos" maxlength="35" value="<?php echo $campos['cliente_apellidos']; ?>">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
@@ -80,8 +80,8 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
-							<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_direccion_up" id="cliente_direccion" maxlength="190" value="<?php echo $campos['cliente_direccion']; ?>">
+							<label for="cliente_categoria" class="bmd-label-floating">Dirección</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_up" id="cliente_categoria" maxlength="190" value="<?php echo $campos['cliente_categoria']; ?>">
 						</div>
 					</div>
 				</div>
