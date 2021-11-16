@@ -40,7 +40,7 @@ class clienteControlador extends clienteModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $cliente_ci)) {
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $cliente_ci)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -498,7 +498,7 @@ class clienteControlador extends clienteModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[0-9-]{10,20}", $cliente_ci)) {
+        if (mainModel::verificar_datos("[0-9-]{7,20}", $cliente_ci)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",

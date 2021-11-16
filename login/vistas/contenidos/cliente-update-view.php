@@ -56,7 +56,7 @@ $datos_cliente=$ins_cliente->datos_cliente_controlador("Unico",$pagina[1]);
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="cliente_ci" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="cliente_ci_up" id="cliente_ci" maxlength="20" value="<?php echo $campos['cliente_ci']; ?>">
+							<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="cliente_ci_up" id="cliente_ci" maxlength="20" value="<?php echo $campos['cliente_ci']; ?>">
 						</div>
 					</div>
 					

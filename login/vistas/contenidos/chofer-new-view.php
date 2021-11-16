@@ -36,7 +36,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="chofer_dni" class="bmd-label-floating">DNI</label>
-							<input type="text" pattern="[0-9-]{10,20}" class="form-control" name="chofer_dni_reg" id="chofer_dni" maxlength="20" required="">
+							<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="chofer_dni_reg" id="chofer_dni" maxlength="20" required="">
 						</div>
 					</div>
 					
