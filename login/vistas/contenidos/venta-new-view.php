@@ -58,12 +58,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_descuento_reg" id="venta_descuento" >
 						</div>
 					</div>
-					<div class="col-12 col-md-6">
-						<div class="form-group">
-							<label for="venta_total" class="bmd-label-floating">Total</label>
-							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_total_reg" id="venta_total">
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</fieldset>

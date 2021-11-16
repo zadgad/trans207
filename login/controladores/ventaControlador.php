@@ -17,7 +17,8 @@ class ventaControlador extends ventaModelo
         $venta_monto    = mainModel::limpiar_cadena($_POST['venta_monto_reg']);
         $venta_cantidad  = mainModel::limpiar_cadena($_POST['venta_cantidad_reg']);
         $venta_descuento  = mainModel::limpiar_cadena($_POST['venta_descuento_reg']);
-        $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
+        $venta_total=($venta_monto*$venta_cantidad)-$venta_descuento;
+        //       $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
 
         /*== comprobar campos vacios ==*/
         if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == "") {
