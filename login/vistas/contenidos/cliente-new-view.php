@@ -114,7 +114,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 							<div class="col-12">
 								<div class="form-group">
 									<select class="form-control" name="cliente_rol_reg">
-										<option value="2">Cliente</option>
+										<option value="Socio">Cliente</option>
 									</select>
 								</div>
 							</div>
