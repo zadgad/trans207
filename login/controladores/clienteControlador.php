@@ -715,6 +715,7 @@ class clienteControlador extends clienteModelo
                     ];
             }
          echo json_encode($alerta);
+         exit();
     }
     public function getCiente()
     {
