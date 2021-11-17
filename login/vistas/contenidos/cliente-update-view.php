@@ -9,7 +9,7 @@ if ($lc->encryption($_SESSION['id_spm'])!=$pagina[1]) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-sync fa-spin"></i> &nbsp; ACTUALIZAR cliente
+		<i class="fas fa-sync fa-spin"></i> &nbsp; ACTUALIZAR SOCIO
 	</h3>
 	<p class="text-justify">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
@@ -23,13 +23,13 @@ if ($_SESSION['privilegio_spm']==1){
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO cliente</a>
+			<a href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO SOCIO</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE clienteS</a>
+			<a href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SOCIOS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR cliente</a>
+			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOCIO</a>
 		</li>
 	</ul>	
 </div>

@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO Socio
+		<i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO SOCIO
 	</h3>
 	<p class="text-justify">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
@@ -16,13 +16,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a class="active" href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO Socio</a>
+			<a class="active" href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO SOCIO</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE Socios</a>
+			<a href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SOCIOS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR Socio</a>
+			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOCIO</a>
 		</li>
 	</ul>	
 </div>
@@ -63,7 +63,14 @@ if ($_SESSION['privilegio_spm']!=1) {
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="cliente_categoria" class="bmd-label-floating">Categoria Licencia Conducir</label>
-									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_reg" id="cliente_categoria" maxlength="190">
+									<select class="form-control" name="cliente_categoria_reg" id="cliente_categoria">
+										    <option value="">--Seleccionar Categoria--</option>
+										    <option value="C">Categoria C</option>
+										    <option value="B">Categoria B</option>
+										    <option value="A">Categoria A</option>
+										</select>
+									<!-- <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_categoria_reg" id="cliente_categoria" maxlength="190"> -->
+
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
