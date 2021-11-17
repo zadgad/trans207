@@ -741,5 +741,30 @@ class clienteControlador extends clienteModelo
         $datos=$datos->fetchAll();
         return $datos;
     }
+    public function getventafecha(){
+        // en esta consulta debes , mandar fechas y el ci del cliente
+        $consulta="SELECT cliente_id, cliente_ci, cliente_nombre, venta_id, venta_tipo, venta_monto,venta_cantidad,venta_descuento,venta_total 
+        FROM venta_cliente , cliente , venta 
+        WHERE venta_cliente.venta_venta_id=venta.venta_id AND venta_cliente.cliente_cliente_id=cliente.cliente_id AND venta.created_at
+         BETWEEN '2021-11-14' AND '2021-11-16'  AND  cliente.cliente_ci=8848787";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+
+    }
+    public function getclienteauto(){
+        // en esta consulta debes mandar el ci del cliente y remplazarlo
+        
+        $consulta="SELECT cliente_ci, cliente_nombre, auto_placa, auto_chasis
+        FROM cliente c, cliente_vehiculo cv, vehiculo v
+        WHERE c.cliente_id=cv.cliente_cliente_id AND cv.vehiculo_vehiculo_id=v.auto_id AND c.cliente_ci=78784878";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+
+    }
+
 
 }
