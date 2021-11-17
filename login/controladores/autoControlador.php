@@ -476,4 +476,5 @@ class autoControlador extends autoModelo
 
 
       }/*fin de controlador*/ 
+
 }
