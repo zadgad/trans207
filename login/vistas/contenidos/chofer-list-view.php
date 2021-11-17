@@ -16,13 +16,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer</a>
+			<a href="<?php echo SERVERURL; ?>chofer-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer</a>
 		</li>
 		<li>
-			<a class="active" href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE choferS</a>
+			<a class="active" href="<?php echo SERVERURL; ?>chofer-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE choferS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR chofer</a>
+			<a href="<?php echo SERVERURL; ?>chofer-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR chofer</a>
 		</li>
 	</ul>	
 </div>

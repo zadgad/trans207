@@ -231,7 +231,7 @@ class choferControlador extends choferModelo
 
         }
          echo json_encode($alerta);
-
+        exit();
     } /*fin de controlador*/
 
     /*--------- Controlador paginar chofer ---------*/
@@ -425,7 +425,7 @@ class choferControlador extends choferModelo
                 ];
          }
           echo json_encode($alerta);
-          
+          exit();
         }/*fin de controlador*/  
          /*Controlodar datos chofer*/
     public function datos_chofer_controlador($tipo,$id){
@@ -680,6 +680,7 @@ class choferControlador extends choferModelo
                     ];
                     }
                     echo json_encode($alerta);
+                    exit();
                 }
 
          /*fin de controlador*/ 

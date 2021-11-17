@@ -23,13 +23,13 @@ if ($_SESSION['privilegio_spm']==1){
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer</a>
+			<a href="<?php echo SERVERURL; ?>chofer-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE choferS</a>
+			<a href="<?php echo SERVERURL; ?>chofer-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE choferS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR chofer</a>
+			<a href="<?php echo SERVERURL; ?>chofer-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR chofer</a>
 		</li>
 	</ul>	
 </div>
@@ -58,50 +58,50 @@ $datos_chofer=$ins_chofer->datos_chofer_controlador("Unico",$pagina[1]);
 							<div class="col-12 col-md-4">
 								<div class="form-group">
 									<label for="chofer_ci" class="bmd-label-floating">C.I.</label>
-									<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="chofer_ci_up" id="chofer_ci" maxlength="20" required="">
+									<input type="text" pattern="[0-9-]{7,20}" class="form-control" name="chofer_ci_up" id="chofer_ci" maxlength="20" required="" value="<?php echo $campos['chofer_ci']; ?>">
 								</div>
 							</div>
 							
 							<div class="col-12 col-md-4">
 								<div class="form-group">
 									<label for="chofer_nombre" class="bmd-label-floating">Nombres</label>
-									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_nombre_up" id="chofer_nombre" maxlength="35" >
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_nombre_up" id="chofer_nombre" maxlength="35" value="<?php echo $campos['chofer_nombre']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-4">
 								<div class="form-group">
 									<label for="chofer_apellidos" class="bmd-label-floating">Apellidos</label>
-									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_apellidos_up" id="chofer_apellidos" maxlength="35">
+									<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="chofer_apellidos_up" id="chofer_apellidos" maxlength="35" value="<?php echo $campos['chofer_apellidos']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_telefono" class="bmd-label-floating">Teléfono</label>
-									<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_telefono_up" id="chofer_telefono" maxlength="20">
+									<input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_telefono_up" id="chofer_telefono" maxlength="20" value="<?php echo $campos['chofer_telefono']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_categoria" class="bmd-label-floating">Categoria Licencia Conducir</label>
-									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_up" id="chofer_categoria" maxlength="190">
+									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_up" id="chofer_categoria" maxlength="190" value="<?php echo $campos['chofer_categoria']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_nacimiento" class="bmd-label-floating">Fecha Nac.</label>
-									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_nacimiento_up" id="chofer_nacimiento" maxlength="20">
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_nacimiento_up" id="chofer_nacimiento" maxlength="20" value="<?php echo $campos['chofer_nacimiento']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_admincion" class="bmd-label-floating">Fecha de Afiliación</label>
-									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_admincion_up" id="chofer_admincion" maxlength="190" value="">
+									<input type="date" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_admincion_up" id="chofer_admincion" maxlength="190" value="<?php echo $campos['chofer_admincion']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_monto" class="bmd-label-floating">Monto de Afiliación</label>
-									<input type="number" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_monto_up" id="chofer_monto" maxlength="20">
+									<input type="number" pattern="[0-9()+]{8,20}" class="form-control" name="chofer_monto_up" id="chofer_monto" maxlength="20" value="<?php echo $campos['chofer_monto']; ?>">
 								</div>
 							</div>
 						</div>
@@ -115,13 +115,13 @@ $datos_chofer=$ins_chofer->datos_chofer_controlador("Unico",$pagina[1]);
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_usuario" class="bmd-label-floating">Nombre de Chofer</label>
-									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="chofer_usuario_up" id="chofer_usuario" maxlength="35">
+									<input type="text" pattern="[a-zA-Z0-9]{1,35}" class="form-control" name="chofer_usuario_up" id="chofer_usuario" maxlength="35" value="<?php echo $campos['chofer_usuario']; ?>">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_email" class="bmd-label-floating">Email</label>
-									<input type="email" class="form-control" name="chofer_email_up" id="chofer_email" maxlength="70">
+									<input type="email" class="form-control" name="chofer_email_up" id="chofer_email" maxlength="70" value="<?php echo $campos['chofer_email']; ?>">
 								</div>
 							</div>
 					</div>
