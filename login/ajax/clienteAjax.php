@@ -2,7 +2,7 @@
     $peticionAjax=true;
     require_once "../config/APP.php";
 
-    if(isset($_POST['cliente_ci_reg']) || isset($_POST['cliente_id_del']) || isset($_POST['cliente_id_up'])){
+    if(isset($_POST['cliente_ci_reg']) || isset($_POST['cliente_id_del']) || isset($_POST['cliente_id_up'])||isset($_POST['vehiculo_add'])){
 
         /*--------- Instancia al controlador ---------*/
         require_once "../controladores/clienteControlador.php";
@@ -21,6 +21,10 @@
          /*--------- Actualizar un cliente ---------*/
         if (isset($_POST['cliente_id_up'])) {
              echo $ins_cliente->actualizar_cliente_controlador();
+        }
+        if (isset($_POST['vehiculo_add'])||isset($_POST['cliente_add'])) {
+            echo $ins_cliente->add_cliente_controlador();
+            var_dump($_POST);
         }
 
     }else{

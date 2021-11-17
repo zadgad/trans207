@@ -119,4 +119,7 @@ function alertas_ajax(alerta){
 	});
 
 
-	
+	$(document).on("click", ".vehiculoCliente", function () {
+		var ids = $(this).data('id');
+     $(".modal-body #cliente_add").val( ids );
+    });

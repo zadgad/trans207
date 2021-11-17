@@ -43,16 +43,23 @@ echo $ins_cliente->paginador_cliente_controlador($pagina[1],15,$_SESSION['privil
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
+		<form class="form-neon FormularioAjax"action="<?php echo SERVERURL; ?>ajax/clienteAjax.php" method="POST" data-form="save" autocomplete="off">
+        	<div class="modal-body">
 					  <div class="row">
+						  <input type="hidden" name="cliente_add" id="cliente_add" style="display:none;">
 							<div class="col-6">
 								<label for="">Asignar vehiculo</label>
 								<div class="form-group">
 									<select class="form-control" name="vehiculo_add">
-										<option value="1">Vehiculo</option>
-										<option value="2">Vehiculo2</option>
-										<option value="3">Vehiculo3</option>
-										<option value="4">Vehiculo4</option>
+										<?php
+										$option ='<option value="">selecionar vehiculo..</option>';
+										$ins_vehiculo=new clienteControlador();
+										$vehiculo =$ins_vehiculo->getVehiculo();
+										 foreach ($vehiculo as $key => $row) {
+											$option .='<option value="'.$row["auto_id"].'">'.$row["auto_placa"].'</option>';
+										}
+										echo $option;
+										 ?>
 									</select>
 								</div>
 							</div>
@@ -60,20 +67,25 @@ echo $ins_cliente->paginador_cliente_controlador($pagina[1],15,$_SESSION['privil
 								<label for="">Asignar Chofer</label>
 								<div class="form-group">
 									<select class="form-control" name="chofer_add">
-										<option value="1">Chofer 1</option>
-										<option value="2">Chofer 2</option>
-										<option value="3">Chofer 3</option>
-										<option value="4">Chofer 4</option>
+										<?php
+										$option ='<option value="">selecionar chofer..</option>';
+										$ins_chofer=new clienteControlador();
+										$chofer =$ins_chofer->getchofer();
+										 foreach ($chofer as $key => $row) {
+											$option .='<option value="'.$row["chofer_id"].'">'.$row["chofer_ci"].'</option>';
+										}
+										echo $option;
+										 ?>
 									</select>
 								</div>
 							</div>
 						</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				<button class="btn btn-primary" type="submit" >ASIGNAR</button>
+			</div>
+		</form>
 		</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary vehicleCli" type="button" data-dismiss="modal" >Salir</button>
-  
-        </div>
-      </div>
-    </div>
-  </div>
+	</div>
+</div>

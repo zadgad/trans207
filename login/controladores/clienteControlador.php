@@ -297,7 +297,7 @@ class clienteControlador extends clienteModelo
                         <td>'.$rows['cliente_telefono'].'</td>
                         <td>'.$rows['cliente_usuario'].'</td>
                         <td>'.$rows['cliente_email'].'</td>
-                        <td><a class="dropdown-item" href="#" data-id="'.mainModel::encryption($rows['cliente_id']).'" data-toggle="modal" data-target="#vehiculoModal">
+                        <td><a class="dropdown-item vehiculoCliente" href="#" data-id="'.mainModel::encryption($rows['cliente_id']).'" data-toggle="modal" data-target="#vehiculoModal">
                         <i class="fas fa-bus fa-sm fa-fw mr-2 text-gray-400"></i>
                         Mis Vehiculos
                          </a></td>
@@ -683,5 +683,61 @@ class clienteControlador extends clienteModelo
                     echo json_encode($alerta);
 
 
-      }/*fin de controlador*/ 
+      }/*fin de controlador*/
+    public function add_cliente_controlador(){
+           /*Preparandos datos para  enviarlos al modelo*/
+            $id=mainModel::decryption($_POST['cliente_add']);
+            $cliente_add    = mainModel::limpiar_cadena($id);
+            $vehiculo_add  = mainModel::limpiar_cadena($_POST['vehiculo_add']);
+            $chofer_add ="";
+            if (isset($_POST['chofer_add'])) {
+                $chofer_add = mainModel::limpiar_cadena($_POST['chofer_add']);
+            }
+            $datos_cliente_up=[
+                            "cliente_add"        => $cliente_add,
+                            "vehiculo_add"     => $vehiculo_add,
+                             "chofer_add"     => $chofer_add
+                               ];
+           if(clienteModelo::add_cliente_modelo($datos_cliente_up)){
+                  $alerta = [
+                    "Alerta"  => "recargar",
+                    "Titulo" => "Datos actualizados",
+                    "Texto"  => "Los datos han sido actualizados con exito",
+                    "Tipo"   => "success"
+                    ];
+                    }else{
+                      $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto"  => "No hemos podido actualizar los datos, por favor intenta nuevamente",
+                        "Tipo"   => "error"
+                    ];
+            }
+         echo json_encode($alerta);
+    }
+    public function getCiente()
+    {
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente  ORDER BY cliente_ci ASC";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+    }
+    public function getVehiculo()
+    {
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo  ORDER BY auto_placa ASC ";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+    }
+    public function getChofer()
+    {
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer  ORDER BY chofer_ci ASC";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+    }
+
 }

@@ -100,5 +100,29 @@ cliente_rol=:cliente_rol WHERE cliente_id=:cliente_id");
                          return $sql;
 
              }
+             public static function add_cliente_modelo($datos){
+                   if (!empty($datos['chofer_add'])) {
+                         $sql2=mainModel::conectar()->prepare("INSERT INTO chofer_vehiculo(
+                        chofer_chofer_id,
+                        vehiculo_vehiculo_id) VALUES(
+                        :chofer_chofer_id,
+                        :vehiculo_vehiculo_id)");
+                        $sql2->bindParam(":chofer_chofer_id",$datos['chofer_add']);
+                        $sql2->bindParam(":vehiculo_vehiculo_id",$datos['vehiculo_add']);
+                       
+                        $sql2->execute();
+                   }
+                  $sql=mainModel::conectar()->prepare("INSERT INTO cliente_vehiculo(
+                        cliente_cliente_id,
+                        vehiculo_vehiculo_id) VALUES(
+                        :cliente_cliente_id,
+                        :vehiculo_vehiculo_id)");
+                        $sql->bindParam(":cliente_cliente_id",$datos['cliente_add']);
+                        $sql->bindParam(":vehiculo_vehiculo_id",$datos['vehiculo_add']);
+                       
+                  $sql->execute();
+
+                  return $sql;
+             }
 
       }
