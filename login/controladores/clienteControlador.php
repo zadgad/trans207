@@ -727,7 +727,7 @@ class clienteControlador extends clienteModelo
     }
     public function getVehiculo()
     {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo  ORDER BY auto_placa ASC ";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo, cliente_vehiculo  WHERE cliente_cliente_id IS NULL  ORDER BY auto_placa ASC ";
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
@@ -735,7 +735,7 @@ class clienteControlador extends clienteModelo
     }
     public function getChofer()
     {
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer  ORDER BY chofer_ci ASC";
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer WHERE cliente_cliente_id IS NULL  ORDER BY chofer_ci ASC";
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
@@ -755,7 +755,7 @@ class clienteControlador extends clienteModelo
     }
     public function getclienteauto(){
         // en esta consulta debes mandar el ci del cliente y remplazarlo
-        
+
         $consulta="SELECT cliente_ci, cliente_nombre, auto_placa, auto_chasis
         FROM cliente c, cliente_vehiculo cv, vehiculo v
         WHERE c.cliente_id=cv.cliente_cliente_id AND cv.vehiculo_vehiculo_id=v.auto_id AND c.cliente_ci=78784878";
