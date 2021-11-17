@@ -12,12 +12,27 @@ class ventaControlador extends ventaModelo
 
     /*--------- Controlador agregar venta ---------*/
     public function agregar_venta_controlador()
-    {
+    {   $venta_codigo      = mainModel::limpiar_cadena($_POST['venta_codigo_reg']); 
+        $venta_chofer       = mainModel::limpiar_cadena($_POST['chofer_add_reg']);
         $venta_tipo       = mainModel::limpiar_cadena($_POST['venta_tipo_reg']);
         $venta_monto    = mainModel::limpiar_cadena($_POST['venta_monto_reg']);
         $venta_cantidad  = mainModel::limpiar_cadena($_POST['venta_cantidad_reg']);
         $venta_descuento  = mainModel::limpiar_cadena($_POST['venta_descuento_reg']);
         $venta_total=($venta_monto*$venta_cantidad)-$venta_descuento;
+
+        // if($venta_chofer==0){
+        //     $id_cliente=" SELECT cliente_id
+        //     FROM cliente 
+        //     WHERE cliente_ci=$venta_socio
+        //     ";       
+
+
+        // }else{
+        //     $id_cliente=" SELECT chofer_id
+        //     FROM chofer 
+        //     WHERE chofer_ci=$venta_chofer";
+        // }
+
         //       $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
 
         /*== comprobar campos vacios ==*/
@@ -114,7 +129,8 @@ class ventaControlador extends ventaModelo
             "venta_descuento"   =>$venta_descuento,
             "venta_total"  => $venta_total,
         ];
-        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg);
+
+        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg,$venta_desing);
         if ($agregar_venta->rowCount() == 1) {
             $alerta = [
                 "Alerta" => "limpiar",

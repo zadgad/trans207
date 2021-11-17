@@ -19,20 +19,54 @@ if ($_SESSION['privilegio_spm']!=1) {
 			<a class="active" href="<?php echo SERVERURL; ?>venta-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO VENTA</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>venta-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE VENTASS</a>
+			<a href="<?php echo SERVERURL; ?>venta-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE VENTAS}S</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>venta-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR VWNTA</a>
+			<a href="<?php echo SERVERURL; ?>venta-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR VENTA</a>
 		</li>
 	</ul>	
 </div>
 
 <div class="container-fluid">
+<?php 
+require_once "./controladores/clienteControlador.php";
+$ins_cliente=new clienteControlador();
+ ?>
 	<form  class="form-neon FormularioAjax"action="<?php echo SERVERURL; ?>ajax/ventaAjax.php" method="POST" data-form="save" autocomplete="off">
 		<fieldset>
-			<legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
+			<legend><i class="far fa-address-card"></i> &nbsp; Detalle de Venta</legend>
 			<div class="container-fluid">
 				<div class="row">
+					
+					<div class="col-12 col-md-4">
+						<div class="form-group">
+							<label for="venta_tipo" class="bmd-label-floating">Comprador</label>
+
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" list="chofer_add" name="chofer_add_reg" id="venta_tipo" maxlength="255" required="" >
+							<datalist id="chofer_add">
+										<?php
+										$option ='<option value="0">selecionar chofer..</option>';
+										$ins_chofer=new clienteControlador();
+										$chofer =$ins_chofer->getChofer2();
+										$ins_cliente=new clienteControlador();
+										$cliente =$ins_cliente->getCliente();
+										 foreach ($cliente as $key => $row) {
+											$option .='<option value="'.$row["cliente_ci"].'">'.$row["cliente_nombre"].'</option>';
+										}
+										foreach ($chofer as $key => $row) {
+											$option .='<option value="'.$row["chofer_ci"].'">'.$row["chofer_nombre"].'</option>';
+										}
+										echo $option;
+										 ?>
+									</datalist>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="form-group">
+							<label for="venta_tipo" class="bmd-label-floating">Codigo venta</label>
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" name="venta_codigo_reg" id="venta_tipo" maxlength="255" required="">
+						</div>
+					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_tipo" class="bmd-label-floating">Tipo venta</label>
