@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SocioS
+		<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SOCIOS
 	</h3>
 	<p class="text-justify">
 		
@@ -16,13 +16,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO Socio</a>
+			<a href="<?php echo SERVERURL; ?>cliente-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO SOCIO</a>
 		</li>
 		<li>
 			<a class="active" href="<?php echo SERVERURL; ?>cliente-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE clienteS</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR Socio</a>
+			<a href="<?php echo SERVERURL; ?>cliente-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR SOCIO</a>
 		</li>
 	</ul>	
 </div>

@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer
+		<i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO CHOFER
 	</h3>
 	<p class="text-justify">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
@@ -16,13 +16,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a class="active" href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO chofer</a>
+			<a class="active" href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO CHOFER</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE choferS</a>
+			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CHOFERES</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR chofer</a>
+			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CHOFER</a>
 		</li>
 	</ul>	
 </div>
@@ -61,7 +61,14 @@ if ($_SESSION['privilegio_spm']!=1) {
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="chofer_categoria" class="bmd-label-floating">Categoria Licencia Conducir</label>
-									<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_reg" id="chofer_categoria" maxlength="190">
+									<select class="form-control" name="chofer_categoria_reg" id="chofer_categoria" >
+										    <option value="">--Seleccionar Categoria--</option>
+										    <option value="C">Categoria C</option>
+										    <option value="B">Categoria B</option>
+										    <option value="A">Categoria A</option>
+										</select>
+									<!-- <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_reg" id="chofer_categoria" maxlength="190"> -->
+
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
@@ -102,6 +109,12 @@ if ($_SESSION['privilegio_spm']!=1) {
 									<input type="email" class="form-control" name="chofer_email_reg" id="chofer_email" maxlength="70">
 								</div>
 							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="chofer_email" class="bmd-label-floating">Email</label>
+									<input type="email" class="form-control" name="chofer_email_reg" id="chofer_email" maxlength="70">
+								</div>
+							</div>
 					</div>
 				</fieldset>
 		<br><br><br>
@@ -110,6 +123,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 		</fieldset><fieldset>
 					<legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
 					<div class="container-fluid">
+						
 						<div class="row">
 							<div class="col-12">
 								<div class="form-group">

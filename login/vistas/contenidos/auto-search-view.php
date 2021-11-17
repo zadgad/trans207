@@ -6,7 +6,7 @@ if ($_SESSION['privilegio_spm']!=1) {
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
-		<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR auto
+		<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AUTO
 	</h3>
 	<p class="text-justify">
 		
@@ -16,13 +16,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO auto</a>
+			<a href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO AUTO</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE autoS</a>
+			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AUTOS</a>
 		</li>
 		<li>
-			<a  href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR auto</a>
+			<a  href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AUTO</a>
 		</li>
 	</ul>	
 </div>
