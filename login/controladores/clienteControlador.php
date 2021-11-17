@@ -698,11 +698,12 @@ class clienteControlador extends clienteModelo
                             "vehiculo_add"     => $vehiculo_add,
                              "chofer_add"     => $chofer_add
                                ];
+            $alerta=[];
            if(clienteModelo::add_cliente_modelo($datos_cliente_up)){
                   $alerta = [
                     "Alerta"  => "recargar",
-                    "Titulo" => "Datos actualizados",
-                    "Texto"  => "Los datos han sido actualizados con exito",
+                    "Titulo" => "Datos asignados",
+                    "Texto"  => "Los datos han sido asignados con exito",
                     "Tipo"   => "success"
                     ];
                     }else{
