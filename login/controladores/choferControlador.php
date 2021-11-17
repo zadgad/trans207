@@ -25,9 +25,10 @@ class choferControlador extends choferModelo
 
         $chofer_email = mainModel::limpiar_cadena($_POST['chofer_email_reg']);
         $chofer_rol = mainModel::limpiar_cadena($_POST['chofer_rol_reg']);
+        $cliente_cliente_id = mainModel::limpiar_cadena($_POST['cliente_cliente_id_reg']);
 
         /*== comprobar campos vacios ==*/
-        if ($chofer_ci == "" || $chofer_nombre == "" || $chofer_apellidos == "" || $chofer_usuario == "" || $chofer_telefono == "" || $chofer_nacimiento == ""|| $chofer_categoria == ""|| $chofer_admincion == ""|| $chofer_monto == ""|| $chofer_email == ""|| $chofer_rol == "") {
+        if ($chofer_ci == "" || $chofer_nombre == "" || $chofer_apellidos == "" || $chofer_usuario == "" || $chofer_telefono == "" || $chofer_nacimiento == ""|| $chofer_categoria == ""|| $chofer_admincion == ""|| $chofer_monto == ""|| $chofer_email == ""|| $chofer_rol == "" || $cliente_cliente_id == "") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -211,7 +212,8 @@ class choferControlador extends choferModelo
             "chofer_admincion"      => $chofer_admincion,
             "chofer_monto"     => $chofer_monto,
             "chofer_email" => $chofer_email,
-            "chofer_rol" => $chofer_rol
+            "chofer_rol" => $chofer_rol,
+            "cliente_cliente_id"=>$cliente_cliente_id
         ];
         $agregar_chofer = choferModelo::agregar_chofer_modelo($datos_chofer_reg);
         if ($agregar_chofer->rowCount() == 1) {
@@ -662,7 +664,8 @@ class choferControlador extends choferModelo
                             "chofer_monto"     => $chofer_monto,
                             "chofer_email" => $chofer_email,
                             "chofer_rol" => $chofer_rol,
-                            "chofer_id"=>$id
+                            "chofer_id"=>$id,
+                            "cliente_cliente_id"=>$cliente_cliente_id
                                ];
                 if(choferModelo::actualizar_chofer_modelo($datos_chofer_up)){
                   $alerta = [

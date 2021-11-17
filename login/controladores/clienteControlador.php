@@ -717,7 +717,7 @@ class clienteControlador extends clienteModelo
          echo json_encode($alerta);
          exit();
     }
-    public function getCiente()
+    public function getCliente()
     {
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM cliente  ORDER BY cliente_ci ASC";
         $conexion=mainModel::conectar();

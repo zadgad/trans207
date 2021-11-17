@@ -3,6 +3,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 	echo $lc->forzar_cierre_sesion_controlador();
 	exit();
 }
+require_once "./controladores/clienteControlador.php";
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
@@ -16,13 +17,13 @@ if ($_SESSION['privilegio_spm']!=1) {
 <div class="container-fluid">
 	<ul class="full-box list-unstyled page-nav-tabs">
 		<li>
-			<a class="active" href="<?php echo SERVERURL; ?>user-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO CHOFER</a>
+			<a class="active" href="<?php echo SERVERURL; ?>chofer-new/"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO CHOFER</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CHOFERES</a>
+			<a href="<?php echo SERVERURL; ?>chofer-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CHOFERES</a>
 		</li>
 		<li>
-			<a href="<?php echo SERVERURL; ?>user-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CHOFER</a>
+			<a href="<?php echo SERVERURL; ?>chofer-search/"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CHOFER</a>
 		</li>
 	</ul>	
 </div>
@@ -111,16 +112,28 @@ if ($_SESSION['privilegio_spm']!=1) {
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
-									<label for="chofer_email" class="bmd-label-floating">Email</label>
-									<input type="email" class="form-control" name="chofer_email_reg" id="chofer_email" maxlength="70">
+									<label for="cliente_cliente_id" class="bmd-label-floating">Cliente Propietario</label>
+									<select class="form-control" name="cliente_cliente_id_reg" id="cliente_cliente_id" >
+										    <option value="">--Seleccionar cliente--</option>
+										    <?php
+											$option ='<option value="">selecionar vehiculo..</option>';
+											$ins_cliente=new clienteControlador();
+											$cliente =$ins_cliente->getCliente();
+											foreach ($cliente as $key => $row) {
+												$option .='<option value="'.$row["cliente_id"].'">'.$row["cliente_ci"].'</option>';
+											}
+											echo $option;
+											?>
+										</select>
+									<!-- <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="chofer_categoria_reg" id="chofer_categoria" maxlength="190"> -->
+
 								</div>
 							</div>
+						</div>
 					</div>
 				</fieldset>
 		<br><br><br>
 		<fieldset>
-		
-		</fieldset><fieldset>
 					<legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
 					<div class="container-fluid">
 						

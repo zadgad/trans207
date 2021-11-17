@@ -17,7 +17,8 @@
                                                                         chofer_admincion,
                                                                         chofer_monto,
                                                                         chofer_email,
-                                                                        chofer_rol) VALUE(
+                                                                        chofer_rol,
+                                                                        cliente_cliente_id) VALUE(
                                                                         :chofer_ci,
                                                                         :chofer_nombre,
                                                                         :chofer_apellidos,
@@ -28,7 +29,8 @@
                                                                         :chofer_admincion,
                                                                         :chofer_monto,
                                                                         :chofer_email,
-                                                                        :chofer_rol
+                                                                        :chofer_rol,
+                                                                        :cliente_cliente_id
                                                                         )");
                   $sql->bindParam(":chofer_ci",$datos['chofer_ci']);
                   $sql->bindParam(":chofer_nombre",$datos['chofer_nombre']);
@@ -41,6 +43,7 @@
                   $sql->bindParam(":chofer_monto",$datos['chofer_monto']);
                   $sql->bindParam(":chofer_email",$datos['chofer_email']);
                   $sql->bindParam(":chofer_rol",$datos['chofer_rol']);
+                  $sql->bindParam(":cliente_cliente_id",$datos['cliente_cliente_id']);
                   $sql->execute();
 
                   return $sql;
@@ -48,9 +51,9 @@
             }
              /*--------- Modelo eliminar chofer ---------*/
              protected static function eliminar_chofer_modelo($id){
-                  $sql=mainModel::conectar()->prepare("DELETE FROM chofer WHERE chofer_id=:ID");
+                  $sql=mainModel::conectar()->prepare("DELETE FROM chofer WHERE chofer_id=:chofer_id");
 
-                  $sql->bindParam(":ID",$id);
+                  $sql->bindParam(":chofer_id",$id);
                   $sql->execute();
 
                   return $sql;
@@ -84,7 +87,8 @@
                   chofer_admincion=:chofer_admincion,
                   chofer_monto=:chofer_monto,
                   chofer_email=:chofer_email,
-                  chofer_rol=:chofer_rol WHERE chofer_id=:chofer_id");
+                  chofer_rol=:chofer_rol,
+                  cliente_cliente_id=:cliente_cliente_id WHERE chofer_id=:chofer_id");
 
                         $sql->bindParam(":chofer_ci",$datos['chofer_ci']);
                         $sql->bindParam(":chofer_nombre",$datos['chofer_nombre']);
@@ -98,6 +102,7 @@
                         $sql->bindParam(":chofer_email",$datos['chofer_email']);
                         $sql->bindParam(":chofer_rol",$datos['chofer_rol']);
                         $sql->bindParam(":chofer_id",$datos['chofer_id']);
+                        $sql->bindParam(":cliente_cliente_id",$datos['cliente_cliente_id']);
                         $sql->execute();
                          return $sql;
 

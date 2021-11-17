@@ -2,7 +2,7 @@
     $peticionAjax=true;
     require_once "../config/APP.php";
 
-    if(isset($_POST['chofer_dni_reg']) || isset($_POST['chofer_id_del']) || isset($_POST['chofer_id_up'])){
+    if(isset($_POST['chofer_ci_reg']) || isset($_POST['chofer_id_del']) || isset($_POST['chofer_id_up'])){
 
         /*--------- Instancia al controlador ---------*/
         require_once "../controladores/choferControlador.php";
@@ -10,7 +10,7 @@
 
 
         /*--------- Agregar un chofer ---------*/
-        if(isset($_POST['chofer_dni_reg']) && isset($_POST['chofer_nombre_reg'])){
+        if(isset($_POST['chofer_ci_reg']) && isset($_POST['chofer_nombre_reg'])){
             echo $ins_chofer->agregar_chofer_controlador();
         }
     
