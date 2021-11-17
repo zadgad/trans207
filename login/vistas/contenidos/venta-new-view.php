@@ -3,6 +3,8 @@ if ($_SESSION['privilegio_spm']!=1) {
 	echo $lc->forzar_cierre_sesion_controlador();
 	exit();
 }
+require_once "./controladores/clienteControlador.php";
+$instancia=new clienteControlador();
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
@@ -60,6 +62,55 @@ if ($_SESSION['privilegio_spm']!=1) {
 							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_descuento_reg" id="venta_descuento" >
 						</div>
 					</div>
+					<div class="col-6">
+								<label for="">Asignar vehiculo</label>
+								<div class="form-group">
+									<select class="form-control" name="vehiculo_add">
+										<?php
+										$option2 ='<option value="">selecionar vehiculo..</option>';
+									
+										$vehiculo =$instancia->getVehiculo();
+										 foreach ($vehiculo as $key => $row2) {
+											$option2 .='<option value="'.$row2["auto_id"].'">'.$row2["auto_placa"].'</option>';
+										}
+										echo $option2;
+										 ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-6">
+								<label for="">Asignar Chofer</label>
+								<div class="form-group">
+									<select class="form-control" name="chofer_add">
+										<?php
+										$option3 ='<option value="">selecionar chofer..</option>';
+									
+										$chofer =$instancia->getchofer();
+										 foreach ($chofer as $key => $row3) {
+											$option3 .='<option value="'.$row3["chofer_id"].'">'.$row3["chofer_ci"].'</option>';
+										}
+										echo $option3;
+										 ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+									<label for="cliente_cliente_id" class="bmd-label-floating">Cliente Propietario</label>
+									<select class="form-control" name="cliente_cliente_id_reg" id="cliente_cliente_id" >
+										    <option value="">--Seleccionar cliente--</option>
+										    <?php
+											$option ='<option value="">selecionar vehiculo..</option>';
+										
+											$cliente =$instancia->getCliente();
+											foreach ($cliente as $key => $row) {
+												$option .='<option value="'.$row["cliente_id"].'">'.$row["cliente_ci"].'</option>';
+											}
+											echo $option;
+											?>
+										</select>
+								</div>
+							</div>
 					
 				</div>
 			</div>
