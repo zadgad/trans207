@@ -12,14 +12,14 @@ class ventaControlador extends ventaModelo
 
     /*--------- Controlador agregar venta ---------*/
     public function agregar_venta_controlador()
-    {   $venta_codigo      = mainModel::limpiar_cadena($_POST['venta_codigo_reg']); 
-        $venta_chofer       = mainModel::limpiar_cadena($_POST['chofer_add_reg']);
+    {   $venta_chofer       = mainModel::limpiar_cadena($_POST['chofer_add_reg']);
         $venta_tipo       = mainModel::limpiar_cadena($_POST['venta_tipo_reg']);
         $venta_monto    = mainModel::limpiar_cadena($_POST['venta_monto_reg']);
         $venta_cantidad  = mainModel::limpiar_cadena($_POST['venta_cantidad_reg']);
         $venta_descuento  = mainModel::limpiar_cadena($_POST['venta_descuento_reg']);
         $venta_total=($venta_monto*$venta_cantidad)-$venta_descuento;
-
+        print "$venta_chofer";
+        
         // if($venta_chofer==0){
         //     $id_cliente=" SELECT cliente_id
         //     FROM cliente 
@@ -36,7 +36,7 @@ class ventaControlador extends ventaModelo
         //       $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
 
         /*== comprobar campos vacios ==*/
-        if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == "") {
+        if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == ""|| $venta_chofer=="") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -48,6 +48,16 @@ class ventaControlador extends ventaModelo
         }
 
         /*== Verificando integridad de los datos ==*/
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,190}", $venta_chofer)) {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "Ocurrió un error inesperado",
+                "Texto"  => "El DNI no coincide con el formato solicitado",
+                "Tipo"   => "error"
+            ];
+            echo json_encode($alerta);
+            exit();
+        }
         if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,190}", $venta_tipo)) {
             $alerta = [
                 "Alerta" => "simple",
@@ -130,7 +140,7 @@ class ventaControlador extends ventaModelo
             "venta_total"  => $venta_total,
         ];
 
-        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg,$venta_desing);
+        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg,$venta_chofer);
         if ($agregar_venta->rowCount() == 1) {
             $alerta = [
                 "Alerta" => "limpiar",

@@ -40,9 +40,9 @@ $ins_cliente=new clienteControlador();
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="venta_tipo" class="bmd-label-floating">Comprador</label>
+							<label for="venta_cliente" class="bmd-label-floating">Comprador</label>
 
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" list="chofer_add" name="chofer_add_reg" id="venta_tipo" maxlength="255" required="" >
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" list="chofer_add" name="chofer_add_reg" id="venta_cliente" maxlength="255" required="" >
 							<datalist id="chofer_add">
 										<?php
 										$option ='<option value="0">selecionar chofer..</option>';
@@ -61,12 +61,7 @@ $ins_cliente=new clienteControlador();
 									</datalist>
 						</div>
 					</div>
-					<div class="col-12 col-md-4">
-						<div class="form-group">
-							<label for="venta_tipo" class="bmd-label-floating">Codigo venta</label>
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" name="venta_codigo_reg" id="venta_tipo" maxlength="255" required="">
-						</div>
-					</div>
+			
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_tipo" class="bmd-label-floating">Tipo venta</label>
@@ -91,7 +86,7 @@ $ins_cliente=new clienteControlador();
 						<div class="form-group">
 							<label for="venta_cantidad" class="bmd-label-floating">Cantidad</label>
 							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" >
-						</div>g
+						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
