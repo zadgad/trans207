@@ -727,13 +727,33 @@ class clienteControlador extends clienteModelo
     }
     public function getVehiculo()
     {
+<<<<<<< HEAD
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo    ORDER BY auto_placa ASC ";
+=======
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo  ORDER BY auto_placa ASC ";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+    }
+    public function getVehiculo2()
+    {
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo, cliente_vehiculo  WHERE cliente_cliente_id IS NULL  ORDER BY auto_placa ASC ";
+>>>>>>> af244c2e6ca48cab945de5dc5ecf8db67321a109
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
         return $datos;
     }
     public function getChofer()
+    {
+        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer   ORDER BY chofer_ci ASC";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        return $datos;
+    }
+     public function getChofer2()
     {
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer WHERE cliente_cliente_id IS NULL  ORDER BY chofer_ci ASC";
         $conexion=mainModel::conectar();
@@ -743,10 +763,13 @@ class clienteControlador extends clienteModelo
     }
     public function getventafecha(){
         // en esta consulta debes , mandar fechas y el ci del cliente
-        $consulta="SELECT cliente_id, cliente_ci, cliente_nombre, venta_id, venta_tipo, venta_monto,venta_cantidad,venta_descuento,venta_total 
+        $cliente_ci=mainModel::limpiar_cadena($_POST['cliente_ci']); 
+        $fecha_desde=mainModel::limpiar_cadena($_POST['fecha_desde']); 
+        $fecha_hasta=mainModel::limpiar_cadena($_POST['fecha_hasta']); 
+        $consulta="SELECT SQL_CALC_FOUND_ROWS cliente_id, cliente_ci, cliente_nombre, venta_id, venta_tipo, venta_monto,venta_cantidad,venta_descuento,venta_total 
         FROM venta_cliente , cliente , venta 
         WHERE venta_cliente.venta_venta_id=venta.venta_id AND venta_cliente.cliente_cliente_id=cliente.cliente_id AND venta.created_at
-         BETWEEN '2021-11-14' AND '2021-11-16'  AND  cliente.cliente_ci=8848787";
+         BETWEEN '$fecha_desde' AND '$fecha_hasta'  AND  cliente.cliente_ci=$cliente_ci";
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
@@ -755,10 +778,10 @@ class clienteControlador extends clienteModelo
     }
     public function getclienteauto(){
         // en esta consulta debes mandar el ci del cliente y remplazarlo
-
-        $consulta="SELECT cliente_ci, cliente_nombre, auto_placa, auto_chasis
+        $cliente_ci=mainModel::limpiar_cadena($_POST['cliente_ci']);  
+        $consulta="SELECT SQL_CALC_FOUND_ROWS cliente_ci, cliente_nombre, auto_placa, auto_chasis
         FROM cliente c, cliente_vehiculo cv, vehiculo v
-        WHERE c.cliente_id=cv.cliente_cliente_id AND cv.vehiculo_vehiculo_id=v.auto_id AND c.cliente_ci=78784878";
+        WHERE c.cliente_id=cv.cliente_cliente_id AND cv.vehiculo_vehiculo_id=v.auto_id AND c.cliente_ci=$cliente_ci";
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();

@@ -687,10 +687,13 @@ class choferControlador extends choferModelo
                 }
                 public function getventafechachofer(){
                         //mandar la fecha y el ci
-                    $consulta="SELECT chofer_id, chofer_ci, chofer_nombre, venta_id, venta_tipo, venta_monto,venta_cantidad,venta_descuento,venta_total 
+                    $chofer_ci=mainModel::limpiar_cadena($_POST['chofer_ci']); 
+                    $fecha_desde=mainModel::limpiar_cadena($_POST['fecha_desde']); 
+                    $fecha_hasta=mainModel::limpiar_cadena($_POST['fecha_hasta']); 
+                    $consulta="SELECT SQL_CALC_FOUND_ROWS chofer_id, chofer_ci, chofer_nombre, venta_id, venta_tipo, venta_monto,venta_cantidad,venta_descuento,venta_total 
                     FROM venta_chofer , chofer , venta 
                     WHERE venta_chofer.venta_venta_id=venta.venta_id AND venta_chofer.chofer_chofer_id=chofer.chofer_id AND venta.created_at
-                     BETWEEN '2021-11-14' AND '2021-11-16'  AND  chofer.chofer_ci=8848787";
+                     BETWEEN '$fecha_desde' AND '$fecha_hasta'  AND  chofer.chofer_ci=$chofer_ci";
                     $conexion=mainModel::conectar();
                     $datos= $conexion->query( $consulta);
                     $datos=$datos->fetchAll();
@@ -699,9 +702,10 @@ class choferControlador extends choferModelo
                 }
                 public function getchoferauto(){
                     //mandar el ci
-                    $consulta="SELECT chofer_ci, chofer_nombre, auto_placa, auto_chasis
+                    $chofer_ci=mainModel::limpiar_cadena($_POST['chofer_ci']); 
+                    $consulta="SELECT SQL_CALC_FOUND_ROWS chofer_ci, chofer_nombre, auto_placa, auto_chasis
                     FROM chofer cf, chofer_vehiculo cv, vehiculo v
-                    WHERE cf.chofer_id=cv.chofer_chofer_id AND cv.vehiculo_vehiculo_id=v.auto_id AND cf.chofer_ci=7888888";
+                    WHERE cf.chofer_id=cv.chofer_chofer_id AND cv.vehiculo_vehiculo_id=v.auto_id AND cf.chofer_ci=$chofer_ci";
                     $conexion=mainModel::conectar();
                     $datos= $conexion->query( $consulta);
                     $datos=$datos->fetchAll();

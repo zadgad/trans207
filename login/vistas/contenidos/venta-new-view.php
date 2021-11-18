@@ -78,15 +78,15 @@ $ins_cliente=new clienteControlador();
 						<div class="form-group">
 							<label for="venta_monto" class="bmd-label-floating">Monto</label>
 						
-						
-							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_monto_reg" id="venta_monto"  >
+										
+							<!-- <input type="number" pattern="[0-9()+]" class="form-control" name="venta_monto_reg" id="venta_monto"  > -->
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_cantidad" class="bmd-label-floating">Cantidad</label>
 							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" >
-						</div>
+						</div>g
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
