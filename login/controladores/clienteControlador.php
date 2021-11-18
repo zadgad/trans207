@@ -727,9 +727,6 @@ class clienteControlador extends clienteModelo
     }
     public function getVehiculo()
     {
-<<<<<<< HEAD
-        $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo    ORDER BY auto_placa ASC ";
-=======
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo  ORDER BY auto_placa ASC ";
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
@@ -739,7 +736,6 @@ class clienteControlador extends clienteModelo
     public function getVehiculo2()
     {
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM vehiculo, cliente_vehiculo  WHERE cliente_cliente_id IS NULL  ORDER BY auto_placa ASC ";
->>>>>>> af244c2e6ca48cab945de5dc5ecf8db67321a109
         $conexion=mainModel::conectar();
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
@@ -788,7 +784,7 @@ class clienteControlador extends clienteModelo
         return $datos;
 
     }
-    public function getChofer2()
+    public function getChofer3()
     {
         $consulta="SELECT SQL_CALC_FOUND_ROWS * FROM chofer  ORDER BY chofer_ci ASC";
         $conexion=mainModel::conectar();
