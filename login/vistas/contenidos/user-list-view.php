@@ -28,6 +28,9 @@ if ($_SESSION['privilegio_spm']!=1) {
 </div>
 
 <div class="container-fluid">
+	<p>
+		<button type="button" id="export" class="btn btn-raised btn-warning"><i class="far fa-file"></i> &nbsp; EXPORTAR PDF</button>
+	</p>
 <?php 
 require_once "./controladores/usuarioControlador.php";
 $ins_usuario=new usuarioControlador();

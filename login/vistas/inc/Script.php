@@ -21,4 +21,6 @@
     <script src="<?php echo SERVERURL; ?>vistas/js/main.js" ></script>
 
     <script src="<?php echo SERVERURL; ?>vistas/js/alertas.js" ></script>
+    <script src="<?php echo SERVERURL; ?>vistas/js/jspdf.min.js"></script>
+    <script src="<?php echo SERVERURL; ?>vistas/js/jsPdf.js"></script>
   

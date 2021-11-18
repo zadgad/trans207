@@ -272,7 +272,7 @@ class choferControlador extends choferModelo
     
 
         $tabla.='<div class="table-responsive">
-            <table class="table table-dark table-sm">
+            <table class="table table-dark table-sm" id="example">
                 <thead>
                     <tr class="text-center roboto-medium">
                         <th>#</th>

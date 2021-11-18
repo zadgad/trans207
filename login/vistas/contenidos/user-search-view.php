@@ -72,6 +72,7 @@ else
 				<div class="col-12">
 					<p class="text-center" style="margin-top: 20px;">
 						<button type="submit" class="btn btn-raised btn-danger"><i class="far fa-trash-alt"></i> &nbsp; ELIMINAR BÚSQUEDA</button>
+						<button type="button" id="export" class="btn btn-raised btn-warning"><i class="far fa-file"></i> &nbsp; EXPORTAR PDF</button>
 					</p>
 				</div>
 			</div>

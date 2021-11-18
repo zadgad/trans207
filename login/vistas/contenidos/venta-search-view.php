@@ -46,6 +46,7 @@ if(!isset($_SESSION['busqueda_venta']) && empty($_SESSION['busqueda_venta']))
 				<div class="col-12">
 					<p class="text-center" style="margin-top: 40px;">
 						<button type="submit" class="btn btn-raised btn-info"><i class="fas fa-search"></i> &nbsp; BUSCAR</button>
+						<button type="button" id="export" class="btn btn-raised btn-warning"><i class="far fa-file"></i> &nbsp; EXPORTAR PDF</button>
 					</p>
 				</div>
 			</div>
