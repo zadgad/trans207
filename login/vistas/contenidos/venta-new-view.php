@@ -78,7 +78,12 @@ $ins_cliente=new clienteControlador();
 						<div class="form-group">
 							<label for="venta_monto" class="bmd-label-floating">Monto</label>
 						
-										
+							<select class="form-control" name="venta_monto_reg" id="venta_monto">
+    <option value="">--Please choose an option--</option>
+    <option value="70">Compra de Hoja 217</option>
+    <option value="50">Compra de Hoja 207</option>
+
+</select>				
 							<!-- <input type="number" pattern="[0-9()+]" class="form-control" name="venta_monto_reg" id="venta_monto"  > -->
 						</div>
 					</div>
