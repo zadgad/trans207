@@ -7,9 +7,10 @@
             /*--------- Modelo agregar venta ---------*/
             //venta_id	venta_tipo	venta_monto	venta_cantidad	venta_descuento	venta_total	created_at	updated_at
 
-            protected static function agregar_venta_modelo($datos,$datoenviado){
+            protected static function agregar_venta_modelo($datos){
 
-                  $sql=mainModel::conectar()->prepare("INSERT INTO venta(venta_tipo,venta_monto	,venta_cantidad,	venta_descuento,	venta_total) VALUES(:venta_tipo,:venta_monto,:venta_cantidad,:venta_descuento,:venta_total)");
+                  $statement=mainModel::conectar();
+                  $sql=$statement->prepare("INSERT INTO venta(venta_tipo,venta_monto	,venta_cantidad,	venta_descuento,	venta_total) VALUES(:venta_tipo,:venta_monto,:venta_cantidad,:venta_descuento,:venta_total)");
 
                   $sql->bindParam(":venta_tipo",$datos['venta_tipo']);
                   $sql->bindParam(":venta_monto",$datos['venta_monto']);
@@ -17,8 +18,7 @@
                   $sql->bindParam(":venta_descuento",$datos['venta_descuento']);
                   $sql->bindParam(":venta_total",$datos['venta_total']);
                   $sql->execute();
-                  
-                  return $sql;
+                  return ['ultimo'=>$statement->lastInsertId(),'data'=>$sql];
 
             }
              /*--------- Modelo eliminar venta ---------*/

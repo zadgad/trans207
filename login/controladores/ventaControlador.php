@@ -12,15 +12,13 @@ class ventaControlador extends ventaModelo
 
     /*--------- Controlador agregar venta ---------*/
     public function agregar_venta_controlador()
-    {   $venta_chofer       = mainModel::limpiar_cadena($_POST['chofer_add_reg']);
+    {   $comprador       = mainModel::limpiar_cadena($_POST['comprador_add_reg']);
         $venta_tipo       = mainModel::limpiar_cadena($_POST['venta_tipo_reg']);
         $venta_monto    = mainModel::limpiar_cadena($_POST['venta_monto_reg']);
         $venta_cantidad  = mainModel::limpiar_cadena($_POST['venta_cantidad_reg']);
         $venta_descuento  = mainModel::limpiar_cadena($_POST['venta_descuento_reg']);
         $venta_total=($venta_monto*$venta_cantidad)-$venta_descuento;
-        print "$venta_chofer";
-        
-        // if($venta_chofer==0){
+        // if($comprador==0){
         //     $id_cliente=" SELECT cliente_id
         //     FROM cliente 
         //     WHERE cliente_ci=$venta_socio
@@ -30,13 +28,13 @@ class ventaControlador extends ventaModelo
         // }else{
         //     $id_cliente=" SELECT chofer_id
         //     FROM chofer 
-        //     WHERE chofer_ci=$venta_chofer";
+        //     WHERE chofer_ci=$comprador";
         // }
 
         //       $venta_total = mainModel::limpiar_cadena($_POST['venta_total_reg']);
 
         /*== comprobar campos vacios ==*/
-        if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == ""|| $venta_chofer=="") {
+        if ($venta_tipo == "" || $venta_monto == "" || $venta_cantidad == ""|| $comprador=="") {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -48,7 +46,7 @@ class ventaControlador extends ventaModelo
         }
 
         /*== Verificando integridad de los datos ==*/
-        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,190}", $venta_chofer)) {
+        if (mainModel::verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,190}", $comprador)) {
             $alerta = [
                 "Alerta" => "simple",
                 "Titulo" => "Ocurrió un error inesperado",
@@ -137,11 +135,12 @@ class ventaControlador extends ventaModelo
             "venta_monto"     => $venta_monto,
             "venta_cantidad"   => $venta_cantidad,
             "venta_descuento"   =>$venta_descuento,
-            "venta_total"  => $venta_total,
+            "venta_total"  => $venta_total
         ];
 
-        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg,$venta_chofer);
-        if ($agregar_venta->rowCount() == 1) {
+        $agregar_venta = ventaModelo::agregar_venta_modelo($datos_venta_reg);
+        $ventaId = $agregar_venta['ultimo'];
+        if ($agregar_venta['data']->rowCount() == 1) {
             $alerta = [
                 "Alerta" => "limpiar",
                 "Titulo" => "venta registrado",
@@ -157,8 +156,39 @@ class ventaControlador extends ventaModelo
             ];
 
         }
-         echo json_encode($alerta);
+        $consulta="SELECT SQL_CALC_FOUND_ROWS cliente_id  FROM cliente WHERE cliente_ci=$comprador";
+        $conexion=mainModel::conectar();
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        if (!empty($datos)) {
+           $sql = 'INSERT INTO venta_cliente(venta_venta_id,cliente_cliente_id) VALUES(:venta_venta_id,:cliente_cliente_id)';
 
+            $statement = mainModel::conectar()->prepare($sql);
+
+            $statement->execute([
+                ':venta_venta_id' => $ventaId,
+                ':cliente_cliente_id' => $datos[0]['cliente_id']
+            ]);
+        } else {
+             $consulta2="SELECT SQL_CALC_FOUND_ROWS chofer_id FROM chofer  WHERE chofer_ci=$comprador";
+            $conexion2=mainModel::conectar();
+            $datos2= $conexion2->query( $consulta2);
+            $datos2=$datos2->fetchAll();
+            if (!empty($datos2)) {
+              $sql2 = 'INSERT INTO venta_chofer(chofer_chofer_id,venta_venta_id) VALUES(:chofer_chofer_id,:venta_venta_id)';
+
+                $statement2 = mainModel::conectar()->prepare($sql2);
+
+                $statement2->execute([
+                    ':venta_venta_id' => $ventaId,
+                    ':chofer_chofer_id' => $datos2[0]['chofer_id']
+                ]);
+            }
+        }
+        ///si ninguno cumple eliminar ultima venta
+        
+         echo json_encode($alerta);
+        exit();
     } /*fin de controlador*/
 
     /*--------- Controlador paginar venta ---------*/

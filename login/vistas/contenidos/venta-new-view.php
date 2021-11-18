@@ -40,25 +40,25 @@ $ins_cliente=new clienteControlador();
 					
 					<div class="col-12 col-md-4">
 						<div class="form-group">
-							<label for="venta_cliente" class="bmd-label-floating">Comprador</label>
+							<label for="comprador_add" class="bmd-label-floating">Comprador</label>
 
-							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" list="chofer_add" name="chofer_add_reg" id="venta_cliente" maxlength="255" required="" >
-							<datalist id="chofer_add">
+							<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\-]{1,255}" class="form-control" list="comprador_add" name="comprador_add_reg" maxlength="255" required="" >
+							<datalist id="comprador_add">
 										<?php
 										$option ='<option value="0">selecionar chofer..</option>';
 										$ins_chofer=new clienteControlador();
-										$chofer =$ins_chofer->getChofer2();
+										$chofer =$ins_chofer->getChofer();
 										$ins_cliente=new clienteControlador();
 										$cliente =$ins_cliente->getCliente();
 										 foreach ($cliente as $key => $row) {
-											$option .='<option value="'.$row["cliente_ci"].'">'.$row["cliente_nombre"].'</option>';
+											$option .='<option value="'.$row["cliente_ci"].'">Cli: '.$row["cliente_nombre"].'</option>';
 										}
 										foreach ($chofer as $key => $row) {
-											$option .='<option value="'.$row["chofer_ci"].'">'.$row["chofer_nombre"].'</option>';
+											$option .='<option value="'.$row["chofer_ci"].'">Chof:'.$row["chofer_nombre"].'</option>';
 										}
 										echo $option;
 										 ?>
-									</datalist>
+							</datalist>
 						</div>
 					</div>
 			
@@ -75,8 +75,8 @@ $ins_cliente=new clienteControlador();
 						
 							<select class="form-control" name="venta_monto_reg" id="venta_monto">
     <option value="">--Please choose an option--</option>
-    <option value="70">Compra de Hoja 217</option>
-    <option value="50">Compra de Hoja 207</option>
+    <option value="70" title="70">Compra de Hoja 217</option>
+    <option value="50" title="50">Compra de Hoja 207</option>
 
 </select>				
 							<!-- <input type="number" pattern="[0-9()+]" class="form-control" name="venta_monto_reg" id="venta_monto"  > -->
@@ -85,13 +85,13 @@ $ins_cliente=new clienteControlador();
 					<div class="col-12 col-md-4">
 						<div class="form-group">
 							<label for="venta_cantidad" class="bmd-label-floating">Cantidad</label>
-							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" >
+							<input type="number" min="0" pattern="[0-9()+]" class="form-control" name="venta_cantidad_reg" id="venta_cantidad" >
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
 						<div class="form-group">
 							<label for="venta_descuento" class="bmd-label-floating">Descuento</label>
-							<input type="number" pattern="[0-9()+]" class="form-control" name="venta_descuento_reg" id="venta_descuento" >
+							<input type="number" min="0" pattern="[0-9()+]" class="form-control" name="venta_descuento_reg" id="venta_descuento" >
 						</div>
 					</div>
 					
