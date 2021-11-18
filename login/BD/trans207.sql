@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2021 a las 06:45:30
+-- Tiempo de generación: 18-11-2021 a las 12:00:03
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -58,9 +58,11 @@ INSERT INTO `chofer` (`chofer_id`, `chofer_ci`, `chofer_nombre`, `chofer_apellid
 (5, 1154784, 'Michael', 'Marques Dannam', 'dannam', 6869897, '1989-08-10', 'B', '2019-01-01', 200, 'dannam@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 3),
 (6, 88888888, 'Rosses', 'Dilams Chambie', 'dilams', 69684897, '1989-08-10', 'B', '2019-01-01', 200, 'dilam@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 4),
 (7, 63668595, 'Monica', 'Quiroga Chambie', 'moni', 69584897, '1989-08-10', 'B', '2019-01-01', 200, 'monai@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 6),
-(8, 6666666, 'Fernando', 'Mamani Chambie', 'fercho', 89587897, '1989-08-10', 'B', '2019-01-01', 200, 'fercho@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 3),
+(8, 6666666, 'Fernando', 'Mamani Chambie', 'fercho', 89587897, '1989-08-10', 'B', '2019-01-01', 200, 'fercho@gmail.com', 'Socio', '2021-11-15 02:36:07', '2021-11-16 23:51:26', 3),
 (9, 7888888, 'Mario', 'Rivas Chambie', 'Mario', 694897, '1989-08-10', 'B', '2019-01-01', 200, 'mars@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 3),
-(10, 245556, 'Rioja', 'Marciano Chambie', 'Mario', 694897, '1985-08-10', 'B', '2019-01-01', 200, 'rioja@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 7);
+(10, 245556, 'Rioja', 'Marciano Chambie', 'Mario', 694897, '1985-08-10', 'B', '2019-01-01', 200, 'rioja@gmail.com', 'Chofer', '2021-11-15 02:36:07', '2021-11-15 02:36:07', 7),
+(11, 3245678, 'dfghjk', 'yhjk', 'chort', 32456789, '2021-11-17', 'B', '2021-11-18', 1234, 'chofer@gmail.com', 'Socio', '2021-11-17 00:42:43', '2021-11-17 00:42:43', 10),
+(12, 45678889, 'bug', 'nuevo bug', 'BUG', 345678899, '2021-11-09', 'B', '2021-11-18', 4356, 'BUG@gmail.com', 'Socio', '2021-11-18 06:59:08', '2021-11-18 06:59:08', 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +145,11 @@ INSERT INTO `cliente_vehiculo` (`cliente_cliente_id`, `vehiculo_vehiculo_id`) VA
 (2, 2),
 (3, 3),
 (4, 5),
-(6, 6);
+(6, 6),
+(5, 2),
+(5, 10),
+(4, 6),
+(6, 10);
 
 -- --------------------------------------------------------
 
@@ -250,7 +256,24 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`venta_id`, `venta_tipo`, `venta_monto`, `venta_cantidad`, `venta_descuento`, `venta_total`, `created_at`, `updated_at`) VALUES
-(1, 'ratillo', 3, 3, 8, 55, '2021-11-15 01:27:16', '2021-11-15 02:24:33');
+(1, 'ratillo', 3, 3, 8, 55, '2021-11-15 01:27:16', '2021-11-15 02:24:33'),
+(3, 'compra', 70, 4, 1, 279, '2021-11-18 05:58:59', '2021-11-18 05:58:59'),
+(4, 'compra', 70, 4, 1, 279, '2021-11-18 06:00:06', '2021-11-18 06:00:06'),
+(5, 'buee', 70, 2, 4, 136, '2021-11-18 06:01:22', '2021-11-18 06:01:22'),
+(6, 'nuevo', 70, 2, 4, 136, '2021-11-18 06:04:47', '2021-11-18 06:04:47'),
+(7, 'nuq', 70, 3, 4, 206, '2021-11-18 06:08:22', '2021-11-18 06:08:22'),
+(8, 'nuevo', 70, 121, 3, 8467, '2021-11-18 06:10:35', '2021-11-18 06:10:35'),
+(9, 'jhhhj', 50, 3, 4, 146, '2021-11-18 06:12:38', '2021-11-18 06:12:38'),
+(10, 'hhj', 70, 77, 5, 5385, '2021-11-18 06:15:31', '2021-11-18 06:15:31'),
+(11, 'hhj', 70, 77, 5, 5385, '2021-11-18 06:16:54', '2021-11-18 06:16:54'),
+(12, 'nuevo', 50, 111, 2, 5548, '2021-11-18 06:24:46', '2021-11-18 06:24:46'),
+(13, 'nuevo', 50, 111, 2, 5548, '2021-11-18 06:34:27', '2021-11-18 06:34:27'),
+(14, 'nuevo', 50, 111, 2, 5548, '2021-11-18 06:35:18', '2021-11-18 06:35:18'),
+(15, 'WQEQ', 50, 3, 2, 148, '2021-11-18 06:37:16', '2021-11-18 06:37:16'),
+(16, 'WQEQ', 50, 3, 2, 148, '2021-11-18 06:38:23', '2021-11-18 06:38:23'),
+(17, 'nueco', 70, 3, 3, 207, '2021-11-18 06:48:34', '2021-11-18 06:48:34'),
+(18, 'calsos', 70, 4, 1, 279, '2021-11-18 06:50:38', '2021-11-18 06:50:38'),
+(19, 'nueva', 50, 2222, 1, 111099, '2021-11-18 06:54:56', '2021-11-18 06:54:56');
 
 -- --------------------------------------------------------
 
@@ -263,6 +286,13 @@ CREATE TABLE `venta_chofer` (
   `venta_venta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `venta_chofer`
+--
+
+INSERT INTO `venta_chofer` (`chofer_chofer_id`, `venta_venta_id`) VALUES
+(3, 19);
+
 -- --------------------------------------------------------
 
 --
@@ -273,6 +303,13 @@ CREATE TABLE `venta_cliente` (
   `venta_venta_id` int(11) NOT NULL,
   `cliente_cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `venta_cliente`
+--
+
+INSERT INTO `venta_cliente` (`venta_venta_id`, `cliente_cliente_id`) VALUES
+(18, 6);
 
 --
 -- Índices para tablas volcadas
@@ -346,7 +383,7 @@ ALTER TABLE `venta_cliente`
 -- AUTO_INCREMENT de la tabla `chofer`
 --
 ALTER TABLE `chofer`
-  MODIFY `chofer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `chofer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -370,7 +407,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
