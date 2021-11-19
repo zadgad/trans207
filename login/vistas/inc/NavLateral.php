@@ -117,7 +117,7 @@
                             <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Reportes <i class="fas fa-chevron-down"></i></a>
                             <ul>
                                 <li>
-                                    <a href="<?php echo SERVERURL; ?>reporte-list/"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Reportes</a>
+                                    <a href="<?php echo SERVERURL; ?>reporte-search/"><i class="fas fa-search fa-fw"></i> &nbsp; Reportes</a>
                                 </li>
                             </ul>
                         </li>

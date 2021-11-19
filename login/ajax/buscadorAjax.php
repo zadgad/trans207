@@ -1,7 +1,7 @@
 <?php 
 
   session_start(['name'=>'SPM']);
-  require_once"../config/APP.php";
+  require_once "../config/APP.php";
 /*https://mega.nz/folder/sSAQQBrD#rS8gHwYmJ8o2ID_bWjgFFw*/
 if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) || 
   isset($_POST['fecha_inicio']) || isset($_POST['fecha_final']))
@@ -9,8 +9,7 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
         $data_url = [
          "usuario"=>"user-search",
          "cliente"=>"cliente-search",
-         
-         "prestamo"=>"reservation-search"
+         "reporte"=>"reporte-search",
 
         ];
 
@@ -44,7 +43,7 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
     }
       
 
-      if($modulo=="prestamo")
+      if($modulo=="reporte")
         {
            $fecha_inicio="fecha_inicio_".$modulo;
            $fecha_final="fecha_final_".$modulo;
