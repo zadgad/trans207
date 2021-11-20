@@ -651,6 +651,18 @@ class ventaControlador extends ventaModelo
                     $contador++;
                     $totalAll=$totalAll + $rows['venta_total'];
                  }
+                 $tabla.='<tr class="text-center" >
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><h4>Total:</h4></td>
+                        <td><b>'.$totalAll.' Bs</b></td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>';
              }else{
                 if($total>=1) {
                     $tabla.='<tr class="text-center" ><td colspan="9">
@@ -663,7 +675,7 @@ class ventaControlador extends ventaModelo
              }
                            
             $tabla.='</tbody></table></div>';
-            $tabla.='<p class="text-right" style="margin-right: 12%;"><b>Total:</b> '.$totalAll.' Bs</p>';
+            $tabla.='<p class="text-right" style="margin-right: 12%;"><b>Resultados:</b></p>';
        }
         return $tabla;
     }
