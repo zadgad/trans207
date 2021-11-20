@@ -4,7 +4,7 @@
   require_once "../config/APP.php";
 /*https://mega.nz/folder/sSAQQBrD#rS8gHwYmJ8o2ID_bWjgFFw*/
 if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) || 
-  isset($_POST['fecha_inicio']) || isset($_POST['fecha_final']))
+  isset($_POST['fecha_inicio']) || isset($_POST['fecha_final']) || isset($_POST['busqueda_inicial_B']))
   { 
         $data_url = [
          "usuario"=>"user-search",
@@ -68,11 +68,25 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
 
              }
                 $name_var="busqueda_".$modulo;
+                
                   //iniciar busqueda
                  if(isset($_POST['busqueda_inicial'])){
                    if($_POST['busqueda_inicial']!=""){
                            
                           $_SESSION[$name_var]=$_POST['busqueda_inicial'];
+                    }
+                  }
+                   if(isset($_POST['opciones'])){
+                   if($_POST['opciones']!=""){
+                           
+                          $_SESSION['opciones']=$_POST['opciones'];
+                    }
+                  }
+                  $name_varB="busquedaB_".$modulo;
+                   if(isset($_POST['busqueda_inicial_B'])){
+                   if($_POST['busqueda_inicial_B']!=""){
+                           
+                          $_SESSION[$name_varB]=$_POST['busqueda_inicial_B'];
                     }
                   }
 
@@ -81,6 +95,8 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
                  unset($_SESSION[$fecha_inicio]);
                  unset($_SESSION[$fecha_final]);
                  unset($_SESSION[$name_var]);
+                 unset($_SESSION['opciones']);
+                 unset($_SESSION[$name_varB]);
                }
 
         }

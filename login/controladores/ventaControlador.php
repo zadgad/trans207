@@ -289,7 +289,14 @@ class ventaControlador extends ventaModelo
             }
         return $tabla;
     }/*fin de controlador*/
-
+    public function verify($name){
+         if(isset($_SESSION[$name]) && !empty($_SESSION[$name]))
+       {
+         return true;
+       }else{
+           return false;
+       }
+    }
     /*--------- Controlador eliminar venta ---------*/
     public function eliminar_venta_controlador()
     {
@@ -524,9 +531,31 @@ class ventaControlador extends ventaModelo
 
 
       }/*fin de controlador*/ 
-    public  function reportVenta($privilegio,$id,$search="",$fecha_inicio,$fecha_final){
+    public  function reportVenta(){
+       $privilegio= $_SESSION['privilegio_spm'];
+       $id=$_SESSION['id_spm'];
+       $search="";
+       $searchB="";
+       $fecha_inicio="";
+       $fecha_final="";
+       $opciones="";
+       if ($this->verify('busqueda_reporte')) {
+           $search=$_SESSION['busqueda_reporte'];//chofer
+       }
+       if ($this->verify('busquedaB_reporte')) {
+           $searchB=$_SESSION['busquedaB_reporte'];//cliente
+       }
+       if ($this->verify('fecha_inicio_reporte')) {
+           $fecha_inicio=$_SESSION['fecha_inicio_reporte'];
+       }
+       if ($this->verify('fecha_final_reporte')) {
+           $fecha_final=$_SESSION['fecha_final_reporte'];
+       }
+       if ($this->verify('opciones')) {
+           $opciones=$_SESSION['opciones'];
+       }
         $consulta="";
-        if ($search!="") {
+        if ($search!="" && $opciones=="chofer") {
             $consulta="SELECT SQL_CALC_FOUND_ROWS
                     venta.venta_tipo,
                         CONCAT(chofer.chofer_nombre, ' ', chofer.chofer_apellidos,' con CI: ',chofer.chofer_ci) full_name,
@@ -539,7 +568,7 @@ class ventaControlador extends ventaModelo
                         venta
                     WHERE
                         venta_chofer.venta_venta_id = venta.venta_id AND venta_chofer.chofer_chofer_id = chofer.chofer_id AND venta.created_at BETWEEN  '$fecha_inicio' AND '$fecha_final' AND chofer.chofer_ci = $search GROUP BY venta.venta_tipo";
-        }else{
+        }elseif ($search=="" && $opciones=="chofer") {
              $consulta="SELECT SQL_CALC_FOUND_ROWS
                     venta.venta_tipo,
                         CONCAT(chofer.chofer_nombre, ' ', chofer.chofer_apellidos,' con CI: ',chofer.chofer_ci) full_name,
@@ -553,14 +582,41 @@ class ventaControlador extends ventaModelo
                     WHERE
                         venta_chofer.venta_venta_id = venta.venta_id AND venta_chofer.chofer_chofer_id = chofer.chofer_id AND venta.created_at BETWEEN '$fecha_inicio' AND '$fecha_final' GROUP BY venta.venta_tipo";
         }
-       
+        if ($searchB!="" && $opciones=="cliente") {
+            $consulta="SELECT SQL_CALC_FOUND_ROWS
+                    venta.venta_tipo,
+                        CONCAT(cliente.cliente_nombre, ' ', cliente.cliente_apellidos,' con CI: ',cliente.cliente_ci) full_name,
+                        SUM(venta.venta_cantidad) AS venta_cantidad,
+                        SUM(venta.venta_descuento) AS venta_descuento,
+                        SUM(venta.venta_total) AS venta_total
+                    FROM
+                        venta_cliente,
+                        cliente,
+                        venta
+                    WHERE
+                        venta_cliente.venta_venta_id = venta.venta_id AND venta_cliente.cliente_cliente_id = cliente.cliente_id AND venta.created_at BETWEEN  '$fecha_inicio' AND '$fecha_final' AND cliente.cliente_ci = $searchB GROUP BY venta.venta_tipo";
+        }elseif ($searchB=="" && $opciones=="cliente") {
+             $consulta="SELECT SQL_CALC_FOUND_ROWS
+                    venta.venta_tipo,
+                        CONCAT(cliente.cliente_nombre, ' ', cliente.cliente_apellidos,' con CI: ',cliente.cliente_ci) full_name,
+                        SUM(venta.venta_cantidad) AS venta_cantidad,
+                        SUM(venta.venta_descuento) AS venta_descuento,
+                        SUM(venta.venta_total) AS venta_total
+                    FROM
+                        venta_cliente,
+                        cliente,
+                        venta
+                    WHERE
+                        venta_cliente.venta_venta_id = venta.venta_id AND venta_cliente.cliente_cliente_id = cliente.cliente_id AND venta.created_at BETWEEN '$fecha_inicio' AND '$fecha_final' GROUP BY venta.venta_tipo";
+        }
+         $tabla="";
+       if($consulta!="") {
         $conexion=mainModel::conectar();
-
         $datos= $conexion->query( $consulta);
         $datos=$datos->fetchAll();
         $total=$conexion->query("SELECT FOUND_ROWS()");
         $total=(int) $total->fetchColumn();
-        $tabla="";
+       
         $tabla.='<div class="table-responsive">
             <table class="table table-dark table-sm" id="example">
                 <thead>
@@ -577,7 +633,7 @@ class ventaControlador extends ventaModelo
                 </thead>
                 <tbody>';
                 $totalAll=0;
-             if ($total>=1) {
+             if($total>=1) {
                  $contador=1;
                  foreach ($datos as $rows){
                    $tabla.='<tr class="text-center" >
@@ -596,7 +652,7 @@ class ventaControlador extends ventaModelo
                     $totalAll=$totalAll + $rows['venta_total'];
                  }
              }else{
-                if ($total>=1) {
+                if($total>=1) {
                     $tabla.='<tr class="text-center" ><td colspan="9">
                   <a href="'.$url.'" class="btn btn-raised btn-success btn-sm"> Haga clic aca para recargar el listado</a></td></tr>';
                 }
@@ -608,6 +664,7 @@ class ventaControlador extends ventaModelo
                            
             $tabla.='</tbody></table></div>';
             $tabla.='<p class="text-right" style="margin-right: 12%;"><b>Total:</b> '.$totalAll.' Bs</p>';
+       }
         return $tabla;
     }
 }

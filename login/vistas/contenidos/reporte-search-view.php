@@ -19,7 +19,7 @@ require_once "./controladores/clienteControlador.php";
 	</ul>	
 </div>
 <?php 
-if((!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte']))||(!isset($_SESSION['fecha_inicio_reporte']) && !isset($_SESSION['fecha_final_reporte'])))
+if(!isset($_SESSION['opciones']) && empty($_SESSION['opciones']))
 {
 	
  ?>
@@ -29,26 +29,56 @@ if((!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte']
 		<input type="hidden" name="modulo" value="reporte">
 		<div class="container-fluid">
 			<div class="row justify-content-md-center">
-				<div class="col-12 col-md-6">
+				<div class="col-md-8">
 					<div class="form-group">
-						<label for="inputSearch" class="bmd-label-floating">¿Qué reporte estas buscando?</label>
-						<input type="text" class="form-control" name="busqueda_inicial" list="inputSearch">
+						 <select class="form-control" name="opciones" id="opciones">
+							  <option value="">Selecione el tipo de reporte</option>
+							 <option value="cliente">Cliente</option>
+							 <option value="chofer">Chofer</option>
+						 </select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group"  id="chofer_data">
+						<label for="inputSearch" class="bmd-label-floating">¿Qué chofer estas buscando?</label>
+						<input type="text" class="form-control" name="busqueda_inicial" list="inputSearch" >
 						<datalist id="inputSearch">
 										<?php
-										$option ='<option value="0">selecionar chofer..</option>';
+										$option ='<option>selecionar chofer..</option>';
 										$ins_chofer=new clienteControlador();
 										$chofer =$ins_chofer->getChofer();
 										foreach ($chofer as $key => $row) {
-											$option .='<option value="'.$row["chofer_ci"].'">Chof:'.$row["chofer_nombre"].'</option>';
+											$option .='<option value="'.$row["chofer_ci"].'">Chof: '.$row["chofer_nombre"].'</option>';
 										}
 										echo $option;
 										 ?>
 							</datalist>
 					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group" id="cliente_data">
+						<label for="inputSearch2" class="bmd-label-floating">¿Qué cliente estas buscando?</label>
+						<input type="text" class="form-control" name="busqueda_inicial_B" list="inputSearch2">
+						<datalist id="inputSearch2">
+										<?php
+										$option ='<option >selecionar Cliente..</option>';
+										$ins_cliente=new clienteControlador();
+										$cliente =$ins_cliente->getCliente();
+										 foreach ($cliente as $key => $row) {
+											$option .='<option value="'.$row["cliente_ci"].'">Cli: '.$row["cliente_nombre"].'</option>';
+										}
+										echo $option;
+										 ?>
+						</datalist>
+					</div>
+				</div>
+				<div class="col-md-6">
 					<div class="form-group">
 						<label for="fecha_inicio" class="bmd-label-floating">Fecha final</label>
 						<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio"  value="<?php echo date('Y-m-d') ?>">
 					</div>
+				</div>
+				<div class="col-md-6">
 					<div class="form-group">
 						<label for="fecha_final" class="bmd-label-floating">Fecha inicio</label>
 						<input type="date" class="form-control" name="fecha_final" id="fecha_final" value="<?php echo date('Y-m-d') ?>">
@@ -63,10 +93,33 @@ if((!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte']
 		</div>
 	</form>
 </div>
+<script>
+	var cli2= document.getElementById("cliente_data");
+	var cho2= document.getElementById("chofer_data");
+	  cli2.style.display= "none";
+	  cho2.style.display= "none";
+	document.getElementById("opciones").addEventListener("change", function() {
+
+  // crea un campo oculto con el mismo nombre que la lista desplegable
+  if (this.value=="cliente") {
+	  var cho= document.getElementById("chofer_data");
+	   var cli= document.getElementById("cliente_data");
+	  cli.style.display= "block";
+	  cho.style.display= "none";
+	  
+  } else {
+	   var cho= document.getElementById("chofer_data");
+	   var cli= document.getElementById("cliente_data");
+	   cli.style.display= "none";
+	   cho.style.display= "block";
+  }
+});
+</script>
 <?php 
 }
 else
 {  
+	//var_dump($_SESSION);
 ?>
 
 <div class="container-fluid">
@@ -77,7 +130,15 @@ else
 			<div class="row justify-content-md-center">
 				<div class="col-12 col-md-6">
 					<p class="text-center" style="font-size: 20px;">
-						Resultados de la busqueda <strong>“<?php echo $_SESSION['busqueda_reporte']; ?>”</strong>
+						Resultados de la busqueda <strong>“<?php 
+							echo $_SESSION['opciones'].' :'; 
+						if(isset($_SESSION['busqueda_reporte']) && !empty($_SESSION['busqueda_reporte'])){
+							echo $_SESSION['busqueda_reporte']; 
+						}elseif(isset($_SESSION['busquedaB_reporte']) && !empty($_SESSION['busquedaB_reporte'])){
+							echo $_SESSION['busquedaB_reporte']; 
+						}
+						?>
+						”</strong>
 					</p>
 				</div>
 				<div class="col-12">
@@ -96,7 +157,7 @@ else
 	<?php 
 	require_once "./controladores/ventaControlador.php";
 	$ins_venta=new ventaControlador();
-	echo $ins_venta->reportVenta($_SESSION['privilegio_spm'],$_SESSION['id_spm'],$_SESSION['busqueda_reporte'],$_SESSION['fecha_inicio_reporte'],$_SESSION['fecha_final_reporte']);//$pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION['busqueda_venta']);
+	echo $ins_venta->reportVenta();
  ?>
 </div>
 <?php } ?>
