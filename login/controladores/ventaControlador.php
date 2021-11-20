@@ -484,7 +484,7 @@ class ventaControlador extends ventaModelo
              
                
           /*COMPROBANDO LAS CREDIDENCIALES PARA ACTUALIZACION DATOS*/
-         session_start(['name'=>'SPM']);
+            session_start(['name'=>'SPM']);
             if($_SESSION['privilegio_spm']!=1){
                 $alerta = [
                         "Alerta" => "simple",
@@ -524,4 +524,90 @@ class ventaControlador extends ventaModelo
 
 
       }/*fin de controlador*/ 
+    public  function reportVenta($privilegio,$id,$search="",$fecha_inicio,$fecha_final){
+        $consulta="";
+        if ($search!="") {
+            $consulta="SELECT SQL_CALC_FOUND_ROWS
+                    venta.venta_tipo,
+                        CONCAT(chofer.chofer_nombre, ' ', chofer.chofer_apellidos,' con CI: ',chofer.chofer_ci) full_name,
+                        SUM(venta.venta_cantidad) AS venta_cantidad,
+                        SUM(venta.venta_descuento) AS venta_descuento,
+                        SUM(venta.venta_total) AS venta_total
+                    FROM
+                        venta_chofer,
+                        chofer,
+                        venta
+                    WHERE
+                        venta_chofer.venta_venta_id = venta.venta_id AND venta_chofer.chofer_chofer_id = chofer.chofer_id AND venta.created_at BETWEEN  '$fecha_inicio' AND '$fecha_final' AND chofer.chofer_ci = $search GROUP BY venta.venta_tipo";
+        }else{
+             $consulta="SELECT SQL_CALC_FOUND_ROWS
+                    venta.venta_tipo,
+                        CONCAT(chofer.chofer_nombre, ' ', chofer.chofer_apellidos,' con CI: ',chofer.chofer_ci) full_name,
+                        SUM(venta.venta_cantidad) AS venta_cantidad,
+                        SUM(venta.venta_descuento) AS venta_descuento,
+                        SUM(venta.venta_total) AS venta_total
+                    FROM
+                        venta_chofer,
+                        chofer,
+                        venta
+                    WHERE
+                        venta_chofer.venta_venta_id = venta.venta_id AND venta_chofer.chofer_chofer_id = chofer.chofer_id AND venta.created_at BETWEEN '$fecha_inicio' AND '$fecha_final' GROUP BY venta.venta_tipo";
+        }
+       
+        $conexion=mainModel::conectar();
+
+        $datos= $conexion->query( $consulta);
+        $datos=$datos->fetchAll();
+        $total=$conexion->query("SELECT FOUND_ROWS()");
+        $total=(int) $total->fetchColumn();
+        $tabla="";
+        $tabla.='<div class="table-responsive">
+            <table class="table table-dark table-sm" id="example">
+                <thead>
+                    <tr class="text-center roboto-medium">
+                        <th>#</th>
+                        <th>TIPO VENTA</th>
+                        <th>COMPRADOR</th>
+                        <th>CANTIDAD</th>
+                        <th>DESCUENTO</th>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>';
+                $totalAll=0;
+             if ($total>=1) {
+                 $contador=1;
+                 foreach ($datos as $rows){
+                   $tabla.='<tr class="text-center" >
+                        <td>'.$contador.'</td>
+                        <td>'.$rows['venta_tipo'].'</td>
+                        <td>'.$rows['full_name'].'</td>
+                        <td>'.$rows['venta_cantidad'].'</td>
+                        <td>'.$rows['venta_descuento'].'</td>
+                        <td>'.$rows['venta_total'].'</td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>';
+                    $contador++;
+                    $totalAll=$totalAll + $rows['venta_total'];
+                 }
+             }else{
+                if ($total>=1) {
+                    $tabla.='<tr class="text-center" ><td colspan="9">
+                  <a href="'.$url.'" class="btn btn-raised btn-success btn-sm"> Haga clic aca para recargar el listado</a></td></tr>';
+                }
+                else{
+                  $tabla.='<tr class="text-center" ><td colspan="9">No hay registros en el sistema</td></tr>';
+                }
+              
+             }
+                           
+            $tabla.='</tbody></table></div>';
+            $tabla.='<p class="text-right" style="margin-right: 12%;"><b>Total:</b> '.$totalAll.' Bs</p>';
+        return $tabla;
+    }
 }

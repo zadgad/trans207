@@ -3,6 +3,7 @@ if ($_SESSION['privilegio_spm']!=1) {
 	echo $lc->forzar_cierre_sesion_controlador();
 	exit();
 }
+require_once "./controladores/clienteControlador.php";
  ?>
 <div class="full-box page-header">
 	<h3 class="text-left">
@@ -18,9 +19,9 @@ if ($_SESSION['privilegio_spm']!=1) {
 	</ul>	
 </div>
 <?php 
-if(!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte']))
+if((!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte']))||(!isset($_SESSION['fecha_inicio_reporte']) && !isset($_SESSION['fecha_final_reporte'])))
 {
-
+	
  ?>
 
 <div class="container-fluid">
@@ -31,15 +32,26 @@ if(!isset($_SESSION['busqueda_reporte']) && empty($_SESSION['busqueda_reporte'])
 				<div class="col-12 col-md-6">
 					<div class="form-group">
 						<label for="inputSearch" class="bmd-label-floating">¿Qué reporte estas buscando?</label>
-						<input type="text" class="form-control" name="busqueda_inicial" id="inputSearch">
+						<input type="text" class="form-control" name="busqueda_inicial" list="inputSearch">
+						<datalist id="inputSearch">
+										<?php
+										$option ='<option value="0">selecionar chofer..</option>';
+										$ins_chofer=new clienteControlador();
+										$chofer =$ins_chofer->getChofer();
+										foreach ($chofer as $key => $row) {
+											$option .='<option value="'.$row["chofer_ci"].'">Chof:'.$row["chofer_nombre"].'</option>';
+										}
+										echo $option;
+										 ?>
+							</datalist>
 					</div>
 					<div class="form-group">
 						<label for="fecha_inicio" class="bmd-label-floating">Fecha final</label>
-						<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" >
+						<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio"  value="<?php echo date('Y-m-d') ?>">
 					</div>
 					<div class="form-group">
 						<label for="fecha_final" class="bmd-label-floating">Fecha inicio</label>
-						<input type="date" class="form-control" name="fecha_final" id="fecha_final" >
+						<input type="date" class="form-control" name="fecha_final" id="fecha_final" value="<?php echo date('Y-m-d') ?>">
 					</div>
 				</div>
 				<div class="col-12">
@@ -82,9 +94,9 @@ else
 
 <div class="container-fluid">
 	<?php 
-require_once "./controladores/reporteControlador.php";
-$ins_reporte=new reporteControlador();
-echo $ins_reporte->paginador_reporte_controlador($pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION['busqueda_reporte']);
+	require_once "./controladores/ventaControlador.php";
+	$ins_venta=new ventaControlador();
+	echo $ins_venta->reportVenta($_SESSION['privilegio_spm'],$_SESSION['id_spm'],$_SESSION['busqueda_reporte'],$_SESSION['fecha_inicio_reporte'],$_SESSION['fecha_final_reporte']);//$pagina[1],15,$_SESSION['privilegio_spm'],$_SESSION['id_spm'],$pagina[0],$_SESSION['busqueda_venta']);
  ?>
 </div>
 <?php } ?>

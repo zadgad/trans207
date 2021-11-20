@@ -51,7 +51,7 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
              //Iniciar busqueda
             if(isset($_POST['fecha_inicio']) || isset($_POST['fecha_final']))
               {
-                if($_POST['fecha_inicio']=="" || $_POST['fecha_final']="")
+                if($_POST['fecha_inicio']=="" || $_POST['fecha_final']=="")
                 {
   
                       $alerta = [
@@ -67,11 +67,20 @@ if(isset($_POST['busqueda_inicial']) || isset($_POST['eliminar_busqueda']) ||
                     $_SESSION[$fecha_final]= $_POST['fecha_final'];
 
              }
+                $name_var="busqueda_".$modulo;
+                  //iniciar busqueda
+                 if(isset($_POST['busqueda_inicial'])){
+                   if($_POST['busqueda_inicial']!=""){
+                           
+                          $_SESSION[$name_var]=$_POST['busqueda_inicial'];
+                    }
+                  }
 
-             //Eliminar busqueda
+                //Eliminar busqueda
                if(isset($_POST['eliminar_busqueda'])){
                  unset($_SESSION[$fecha_inicio]);
                  unset($_SESSION[$fecha_final]);
+                 unset($_SESSION[$name_var]);
                }
 
         }
